@@ -1,7 +1,6 @@
-public class PasswordRequirements
-{
-    private static final String[]
-    stuff=
+public class req
+{ 
+    public static final String[] stuff=
     {
         "Must have at least 20 characters minimum.",
         "Must include a space.",
