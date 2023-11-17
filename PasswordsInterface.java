@@ -1,52 +1,53 @@
 import java.awt.Toolkit;
+import java.awt.image.*;
 import java.awt.datatransfer.*;
 import javax.swing.*;
 import javax.swing.JOptionPane.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Ellipse2D;
+import java.io.*;
 
 public class PasswordsInterface
 {
     public static JPanel mainMenuPanel;
+    public static JPanel flashlightPanel;
+    public static JPanel interfacePanel;
     public static JLabel locationLabel;
     public static JLabel passwordLabel;
     public static JLabel guidingLabel;
 
-    // Static fields goes here :3
+    // Static fields go here :3
     private static boolean isDragging = false;
     private static Point offset;
     private static String rawPassword = "";
-    private static int
-    passwordTextWidth = 0,
-    guidingTextWidth = 0,
-    passwordCenterX = 0,
-    guidingCenterX = 0,
-    centerY = 0;
+    private static int passwordTextWidth = 0, guidingTextWidth = 0, passwordCenterX = 0, guidingCenterX = 0, centerY = 0;
+
+    // flashlight thingy
+    private static boolean isFlashlightOn = true;
+    private static Point flashlightCenter = new Point(0, 0);
+    private static int flashlightRadius = 100; // Adjust the radius as needed
 
     public static void initializeComponent()
     {
+        JFrame mainMenuFrame = createMainMenuFrame();
+        mainMenuPanel = createMainMenuPanel();
+        flashlightPanel = createFlashlightPanel();
+        interfacePanel = createInterfacePanel();
 
-        // Initialize JPanel
-        mainMenuPanel = new JPanel();
-        mainMenuPanel.setBackground(Color.GRAY);
-        mainMenuPanel.setLayout(null);  // Use null layout
-        mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
-
-        // Create JLabel for displaying mainMenuPanel location
+        // Create JLabels
         locationLabel = createLocationLabel();
-        mainMenuPanel.add(locationLabel);
-
-        // Create Label for displaying the Password stuff
         passwordLabel = createPasswordLabel();
-        mainMenuPanel.add(passwordLabel);
-        
-        // Create Label for displaying the guiding labels
         guidingLabel = createGuidingLabel();
+
+        // Add JLabels to mainMenuPanel
+        mainMenuPanel.add(locationLabel);
+        mainMenuPanel.add(passwordLabel);
         mainMenuPanel.add(guidingLabel);
 
-        // Initialize JFrame
-        JFrame mainMenuFrame = createMainMenuFrame();
         mainMenuFrame.setContentPane(mainMenuPanel);
+        mainMenuFrame.setGlassPane(flashlightPanel);
+        flashlightPanel.setVisible(true);
         mainMenuFrame.setVisible(true);
         
         mainMenuFrame.addKeyListener(new KeyAdapter() 
@@ -71,14 +72,14 @@ public class PasswordsInterface
                             {
                                 String pastedText = (String) transferable.getTransferData(DataFlavor.stringFlavor);
 
-                                if (pastedText.length() <= 3) 
+                                if (pastedText.length() <= 1) 
                                 {
                                     rawPassword += pastedText;
                                     passwordLabel.setText("< " + rawPassword + " >");
                                 } 
                                 else 
                                 {
-                                    guidingLabel.setText("You can't paste big texts here.");
+                                    guidingLabel.setText("You can only paste one character at a time.");
                                     pastedText = "";  
                                 }
                                 passwordLabelMiddle();
@@ -91,7 +92,7 @@ public class PasswordsInterface
                     }
                     else if(e.getKeyCode() == KeyEvent.VK_A)
                     {
-                        guidingLabel.setText("You cant highlight texts here.");
+                        guidingLabel.setText("You can't highlight texts here.");
                         passwordLabelMiddle();
                     }    
                     else if(e.getKeyCode() == KeyEvent.VK_C)
@@ -119,6 +120,11 @@ public class PasswordsInterface
                         guidingLabel.setText("");
                         rawPassword = rawPassword.substring(0, rawPassword.length() - 1);
                         passwordLabel.setText("< " + rawPassword + " >");
+                        
+                        if(rawPassword == "")
+                        {
+                            passwordLabel.setText("");
+                        }
                         passwordLabelMiddle();
                     }
                 } 
@@ -131,6 +137,8 @@ public class PasswordsInterface
                 }      
             }
         });
+        
+        
         
         mainMenuPanel.addMouseListener(new MouseAdapter() 
         {
@@ -176,6 +184,9 @@ public class PasswordsInterface
             {
                 // Update label with the current cursor position when not dragging
                 locationLabel.setText("Panel Location: (" + e.getX() + ", " + e.getY() + ")");
+                
+                flashlightCenter.setLocation(e.getX(), e.getY());
+                flashlightPanel.repaint(); // Trigger repaint to update flashlight effect
             }
         });
     }
@@ -188,6 +199,66 @@ public class PasswordsInterface
         mainMenuFrame.setUndecorated(true); // Remove window decorations (title bar, borders)
         mainMenuFrame.setLocationRelativeTo(null); // Center the mainMenuFrame on the screen.
         return mainMenuFrame;   
+    }
+    
+    public static JPanel createMainMenuPanel()
+    {
+        JPanel mainMenuPanel = new JPanel();
+        mainMenuPanel.setBackground(Color.GRAY);
+        mainMenuPanel.setLayout(null);  // Use null layout
+        mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
+        return mainMenuPanel;
+    }
+    
+    private static JPanel createFlashlightPanel() 
+    {
+        JPanel flashlightPanel = new JPanel() 
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+    
+                if (isFlashlightOn) 
+                {
+                    BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2d = image.createGraphics();
+            
+                    // Fill the entire image with a black color
+                    g2d.setColor(Color.BLACK);
+                    g2d.fillRect(0, 0, getWidth(), getHeight());
+            
+                    // Create the circular region
+                    Ellipse2D hole = new Ellipse2D.Double(
+                            flashlightCenter.x - flashlightRadius,
+                            flashlightCenter.y - flashlightRadius,
+                            flashlightRadius * 2,
+                            flashlightRadius * 2
+                    );
+            
+                    // Clear the circular region by setting its pixels to transparent
+                    g2d.setComposite(AlphaComposite.Clear);
+                    g2d.fill(hole);
+            
+                    // Draw the image onto the component
+                    g.drawImage(image, 0, 0, null);
+            
+                    g2d.dispose();
+                }
+            }
+        };
+        flashlightPanel.setOpaque(false); // Make the panel transparent
+
+        return flashlightPanel;
+    }
+    
+    public static JPanel createInterfacePanel()
+    {
+        interfacePanel = new JPanel();
+        interfacePanel.setOpaque(false);
+        interfacePanel.setLayout(null); 
+        interfacePanel.setFont(new Font("Consolas", Font.BOLD, 25));
+        return interfacePanel;
     }
     
     public static JLabel createLocationLabel()
