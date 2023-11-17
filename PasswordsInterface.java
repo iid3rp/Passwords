@@ -1,3 +1,5 @@
+import java.awt.Toolkit;
+import java.awt.datatransfer.*;
 import javax.swing.*;
 import javax.swing.JOptionPane.*;
 import java.awt.*;
@@ -52,10 +54,51 @@ public class PasswordsInterface
             @Override
             public void keyPressed(KeyEvent e) 
             {
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V)
+                if (e.isControlDown())
                 {
-                    guidingLabel.setText("It seems that pasting dosen't work in this. :3");
-                    passwordLabelMiddle();
+                    if(e.getKeyCode() == KeyEvent.VK_V)
+                    {
+                        // Get the system clipboard
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                
+                        // Get the contents of the clipboard
+                        Transferable transferable = clipboard.getContents(null);
+                        
+                        // Check if the contents are text
+                        if (transferable != null && transferable.isDataFlavorSupported(DataFlavor.stringFlavor)) 
+                        {
+                            try 
+                            {
+                                String pastedText = (String) transferable.getTransferData(DataFlavor.stringFlavor);
+
+                                if (pastedText.length() <= 3) 
+                                {
+                                    rawPassword += pastedText;
+                                    passwordLabel.setText("< " + rawPassword + " >");
+                                } 
+                                else 
+                                {
+                                    guidingLabel.setText("You can't paste big texts here.");
+                                    pastedText = "";  
+                                }
+                                passwordLabelMiddle();
+                            } 
+                            catch (Exception ex) 
+                            {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                    else if(e.getKeyCode() == KeyEvent.VK_A)
+                    {
+                        guidingLabel.setText("You cant highlight texts here.");
+                        passwordLabelMiddle();
+                    }    
+                    else if(e.getKeyCode() == KeyEvent.VK_C)
+                    {
+                        guidingLabel.setText("You can't copy the current password. >:3");
+                        passwordLabelMiddle();
+                    } 
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
@@ -73,7 +116,7 @@ public class PasswordsInterface
                 {
                     if (!rawPassword.isEmpty()) 
                     {
-                        // Remove the last character from rawPassword
+                        guidingLabel.setText("");
                         rawPassword = rawPassword.substring(0, rawPassword.length() - 1);
                         passwordLabel.setText("< " + rawPassword + " >");
                         passwordLabelMiddle();
@@ -81,6 +124,7 @@ public class PasswordsInterface
                 } 
                 else if(Character.isDefined(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))
                 {
+                    guidingLabel.setText("");
                     rawPassword += e.getKeyChar();
                     passwordLabel.setText("< " + rawPassword + " >");
                     passwordLabelMiddle();
