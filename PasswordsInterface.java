@@ -8,14 +8,17 @@ public class PasswordsInterface
     public static JPanel mainMenuPanel;
     public static JLabel locationLabel;
     public static JLabel passwordLabel;
+    public static JLabel guidingLabel;
 
     // Static fields goes here :3
     private static boolean isDragging = false;
     private static Point offset;
     private static String rawPassword = "";
     private static int
-    textWidth = 0,
-    centerX = 0,
+    passwordTextWidth = 0,
+    guidingTextWidth = 0,
+    passwordCenterX = 0,
+    guidingCenterX = 0,
     centerY = 0;
 
     public static void initializeComponent()
@@ -26,15 +29,19 @@ public class PasswordsInterface
         mainMenuPanel.setBackground(Color.GRAY);
         mainMenuPanel.setLayout(null);  // Use null layout
         mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
-        
+
         // Create JLabel for displaying mainMenuPanel location
         locationLabel = createLocationLabel();
         mainMenuPanel.add(locationLabel);
-        
+
         // Create Label for displaying the Password stuff
         passwordLabel = createPasswordLabel();
         mainMenuPanel.add(passwordLabel);
         
+        // Create Label for displaying the guiding labels
+        guidingLabel = createGuidingLabel();
+        mainMenuPanel.add(guidingLabel);
+
         // Initialize JFrame
         JFrame mainMenuFrame = createMainMenuFrame();
         mainMenuFrame.setContentPane(mainMenuPanel);
@@ -45,23 +52,39 @@ public class PasswordsInterface
             @Override
             public void keyPressed(KeyEvent e) 
             {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_V)
                 {
-                    int result = JOptionPane.showConfirmDialog(mainMenuFrame, 
-                                                               "Are you sure you want to close the application?", 
-                                                               "Confirm Close", 
-                                                               JOptionPane.YES_NO_OPTION);
+                    guidingLabel.setText("It seems that pasting dosen't work in this. :3");
+                    passwordLabelMiddle();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+                {
+                    int result = JOptionPane.showConfirmDialog(mainMenuFrame,
+                            "Are you sure you want to close the application?",
+                            "Confirm Close",
+                            JOptionPane.YES_NO_OPTION);
+                            
                     if (result == JOptionPane.YES_OPTION) 
                     {
                         System.exit(0);
                     }
-                }
-                else
+                } 
+                else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
+                {
+                    if (!rawPassword.isEmpty()) 
+                    {
+                        // Remove the last character from rawPassword
+                        rawPassword = rawPassword.substring(0, rawPassword.length() - 1);
+                        passwordLabel.setText("< " + rawPassword + " >");
+                        passwordLabelMiddle();
+                    }
+                } 
+                else if(Character.isDefined(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))
                 {
                     rawPassword += e.getKeyChar();
                     passwordLabel.setText("< " + rawPassword + " >");
-                }   
-                
+                    passwordLabelMiddle();
+                }      
             }
         });
         
@@ -136,24 +159,44 @@ public class PasswordsInterface
     public static JLabel createPasswordLabel()
     {
         JLabel passwordLabel = new JLabel("");
-        passwordLabel.setFont(new Font("Consolas", Font.BOLD, 20));
+        passwordLabel.setFont(new Font("Consolas", Font.BOLD, 25));
         passwordLabel.setForeground(new Color(255, 255, 255));
         passwordLabel.setLayout(new FlowLayout());
         String passwordText = passwordLabel.getText();
 
         // Calculate the center coordinates of the panel based on the text width
-        FontMetrics metrics = passwordLabel.getFontMetrics(passwordLabel.getFont());
-        textWidth = metrics.stringWidth(passwordText);
-        centerX = mainMenuPanel.getWidth() / 2 - textWidth / 2;
-        centerY = mainMenuPanel.getHeight() / 2 - passwordLabel.getHeight() / 2;
-        
-        passwordLabel.setBounds(centerX, centerY, textWidth, 50); // Set the location and size
+        // Set the location and size
         return passwordLabel;
+    }
+    
+    public static JLabel createGuidingLabel()
+    {
+        JLabel guidingLabel = new JLabel();
+        guidingLabel.setFont(new Font("Consolas", Font.BOLD, 15));
+        guidingLabel.setForeground(new Color(255, 255, 255));
+        guidingLabel.setLayout(new FlowLayout());
+        return guidingLabel;
+    }
+    
+    public static void passwordLabelMiddle()
+    {
+        FontMetrics passwordMetrics = passwordLabel.getFontMetrics(passwordLabel.getFont()),
+                    guidingMetrics = guidingLabel.getFontMetrics(guidingLabel.getFont());
+                    
+        passwordTextWidth = passwordMetrics.stringWidth(passwordLabel.getText());
+        guidingTextWidth = guidingMetrics.stringWidth(guidingLabel.getText());
+        
+        passwordCenterX = mainMenuPanel.getWidth() / 2 - passwordTextWidth / 2;
+        guidingCenterX = mainMenuPanel.getWidth() / 2 - guidingTextWidth / 2;
+                    
+        passwordLabel.setBounds(passwordCenterX, 600, passwordTextWidth, 50);
+        guidingLabel.setBounds(guidingCenterX, 570, guidingTextWidth, 50);
     }
     
     public static void main(String[] args)
     {
         // some stuff here
         // must run at MainMenu.java
+        initializeComponent();
     }
 }
