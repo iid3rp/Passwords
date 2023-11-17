@@ -1,63 +1,76 @@
 import javax.swing.*;
+import javax.swing.JOptionPane.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class PasswordsInterface
 {
-    // Static fields to track dragging state
+    public static JPanel mainMenuPanel;
+    public static JLabel locationLabel;
+    public static JLabel passwordLabel;
+
+    // Static fields goes here :3
     private static boolean isDragging = false;
     private static Point offset;
+    private static String rawPassword = "";
+    private static int
+    textWidth = 0,
+    centerX = 0,
+    centerY = 0;
 
     public static void initializeComponent()
     {
-        // Initialize JFrame
-        JFrame frame = new JFrame("Cute Draggable JFrame Example :3");
 
         // Initialize JPanel
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.GRAY);
-        panel.setLayout(new BorderLayout());
-
-        // Set font for the panel
-        Font font = new Font("Consolas", Font.PLAIN, 12);
-        panel.setFont(font);
-
-        // Add Close Button
-        JButton closeButton = new JButton("Close");
-
-        // Create JLabel for displaying panel location
-        JLabel locationLabel = new JLabel("Panel Location: ");
-        locationLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
-        locationLabel.setForeground(new Color(255, 255, 255));
-        locationLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        locationLabel.setVerticalAlignment(SwingConstants.TOP);
-        panel.add(locationLabel);
-
-        // ActionListener for the Close Button
-        closeButton.addActionListener(new ActionListener()
+        mainMenuPanel = new JPanel();
+        mainMenuPanel.setBackground(Color.GRAY);
+        mainMenuPanel.setLayout(null);  // Use null layout
+        mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
+        
+        // Create JLabel for displaying mainMenuPanel location
+        locationLabel = createLocationLabel();
+        mainMenuPanel.add(locationLabel);
+        
+        // Create Label for displaying the Password stuff
+        passwordLabel = createPasswordLabel();
+        mainMenuPanel.add(passwordLabel);
+        
+        // Initialize JFrame
+        JFrame mainMenuFrame = createMainMenuFrame();
+        mainMenuFrame.setContentPane(mainMenuPanel);
+        mainMenuFrame.setVisible(true);
+        
+        mainMenuFrame.addKeyListener(new KeyAdapter() 
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void keyPressed(KeyEvent e) 
             {
-                int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to close the application?", "Confirm Close", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION)
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
-                    System.exit(0);
+                    int result = JOptionPane.showConfirmDialog(mainMenuFrame, 
+                                                               "Are you sure you want to close the application?", 
+                                                               "Confirm Close", 
+                                                               JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) 
+                    {
+                        System.exit(0);
+                    }
                 }
+                else
+                {
+                    rawPassword += e.getKeyChar();
+                    passwordLabel.setText("< " + rawPassword + " >");
+                }   
+                
             }
         });
-
-        // Layout for Close Button (right-aligned)
-        panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        panel.add(closeButton);
-
-        // MouseListener for dragging the frame
-        panel.addMouseListener(new MouseAdapter()
+        
+        mainMenuPanel.addMouseListener(new MouseAdapter() 
         {
             @Override
-            public void mousePressed(MouseEvent e)
+            public void mousePressed(MouseEvent e) 
             {
-                if (SwingUtilities.isLeftMouseButton(e))
+                if (SwingUtilities.isLeftMouseButton(e)) 
                 {
                     isDragging = true;
                     offset = e.getPoint();
@@ -65,9 +78,9 @@ public class PasswordsInterface
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
+            public void mouseReleased(MouseEvent e) 
             {
-                if (SwingUtilities.isLeftMouseButton(e))
+                if (SwingUtilities.isLeftMouseButton(e)) 
                 {
                     isDragging = false;
                 }
@@ -75,7 +88,7 @@ public class PasswordsInterface
         });
 
         // MouseMotionListener for dragging and updating label
-        panel.addMouseMotionListener(new MouseMotionAdapter()
+        mainMenuPanel.addMouseMotionListener(new MouseMotionAdapter()
         {
             @Override
             public void mouseDragged(MouseEvent e)
@@ -87,7 +100,7 @@ public class PasswordsInterface
                     int deltaX = currentMouse.x - offset.x;
                     int deltaY = currentMouse.y - offset.y;
 
-                    frame.setLocation(deltaX, deltaY);
+                    mainMenuFrame.setLocation(deltaX, deltaY);
                 }
             }
 
@@ -98,25 +111,49 @@ public class PasswordsInterface
                 locationLabel.setText("Panel Location: (" + e.getX() + ", " + e.getY() + ")");
             }
         });
+    }
+    
+    public static JFrame createMainMenuFrame()
+    {
+        JFrame mainMenuFrame = new JFrame("Passwords!");
+        mainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainMenuFrame.setSize(1280, 720); // Set size to 720p
+        mainMenuFrame.setUndecorated(true); // Remove window decorations (title bar, borders)
+        mainMenuFrame.setLocationRelativeTo(null); // Center the mainMenuFrame on the screen.
+        return mainMenuFrame;   
+    }
+    
+    public static JLabel createLocationLabel()
+    {
+        JLabel locationLabel = new JLabel();
+        locationLabel.setFont(new Font("Consolas", Font.PLAIN, 12));
+        locationLabel.setForeground(new Color(255, 255, 255));
+        locationLabel.setLayout(new FlowLayout());
+        locationLabel.setBounds(15, 10, 200, 20);
+        return locationLabel;
+    }
+    
+    public static JLabel createPasswordLabel()
+    {
+        JLabel passwordLabel = new JLabel("");
+        passwordLabel.setFont(new Font("Consolas", Font.BOLD, 20));
+        passwordLabel.setForeground(new Color(255, 255, 255));
+        passwordLabel.setLayout(new FlowLayout());
+        String passwordText = passwordLabel.getText();
 
-        // Set up the frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 720); // Set size to 720p
-        frame.setUndecorated(true); // Remove window decorations (title bar, borders)
-        frame.setLocationRelativeTo(null); // Center the frame on the screen
-        frame.setContentPane(panel);
-        frame.setVisible(true);
+        // Calculate the center coordinates of the panel based on the text width
+        FontMetrics metrics = passwordLabel.getFontMetrics(passwordLabel.getFont());
+        textWidth = metrics.stringWidth(passwordText);
+        centerX = mainMenuPanel.getWidth() / 2 - textWidth / 2;
+        centerY = mainMenuPanel.getHeight() / 2 - passwordLabel.getHeight() / 2;
+        
+        passwordLabel.setBounds(centerX, centerY, textWidth, 50); // Set the location and size
+        return passwordLabel;
     }
     
     public static void main(String[] args)
     {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                initializeComponent();
-            }
-        });
+        // some stuff here
+        // must run at MainMenu.java
     }
 }
