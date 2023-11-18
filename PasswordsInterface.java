@@ -11,17 +11,18 @@ import java.io.*;
 public class PasswordsInterface
 {
     public static JPanel mainMenuPanel;
-    public static JPanel flashlightPanel;
     public static JPanel interfacePanel;
     public static JLabel locationLabel;
     public static JLabel passwordLabel;
     public static JLabel guidingLabel;
+    public static JLabel passwordText;
 
     // Static fields go here :3
     private static boolean isDragging = false;
     private static Point offset;
     private static String rawPassword = "";
     private static int passwordTextWidth = 0, guidingTextWidth = 0, passwordCenterX = 0, guidingCenterX = 0, centerY = 0;
+    private static int passwordTextTextWidth = 0, passwordTextTextHeight = 0;
 
     // flashlight thingy
     private static boolean isFlashlightOn = true;
@@ -32,22 +33,24 @@ public class PasswordsInterface
     {
         JFrame mainMenuFrame = createMainMenuFrame();
         mainMenuPanel = createMainMenuPanel();
-        flashlightPanel = createFlashlightPanel();
         interfacePanel = createInterfacePanel();
 
         // Create JLabels
         locationLabel = createLocationLabel();
         passwordLabel = createPasswordLabel();
         guidingLabel = createGuidingLabel();
+        passwordText = createPasswordText();
 
         // Add JLabels to mainMenuPanel
         mainMenuPanel.add(locationLabel);
-        mainMenuPanel.add(passwordLabel);
-        mainMenuPanel.add(guidingLabel);
+
+        // add interface Panel to the
+        interfacePanel.add(passwordLabel);
+        interfacePanel.add(guidingLabel);
 
         mainMenuFrame.setContentPane(mainMenuPanel);
-        mainMenuFrame.setGlassPane(flashlightPanel);
-        flashlightPanel.setVisible(true);
+        mainMenuFrame.setGlassPane(interfacePanel);
+        interfacePanel.setVisible(true);
         mainMenuFrame.setVisible(true);
         
         mainMenuFrame.addKeyListener(new KeyAdapter() 
@@ -136,9 +139,7 @@ public class PasswordsInterface
                     passwordLabelMiddle();
                 }      
             }
-        });
-        
-        
+        });   
         
         mainMenuPanel.addMouseListener(new MouseAdapter() 
         {
@@ -186,7 +187,7 @@ public class PasswordsInterface
                 locationLabel.setText("Panel Location: (" + e.getX() + ", " + e.getY() + ")");
                 
                 flashlightCenter.setLocation(e.getX(), e.getY());
-                flashlightPanel.repaint(); // Trigger repaint to update flashlight effect
+                interfacePanel.repaint(); // Trigger repaint to update flashlight effect
             }
         });
     }
@@ -210,9 +211,9 @@ public class PasswordsInterface
         return mainMenuPanel;
     }
     
-    private static JPanel createFlashlightPanel() 
+    private static JPanel createInterfacePanel() 
     {
-        JPanel flashlightPanel = new JPanel() 
+        JPanel interfacePanel = new JPanel() 
         {
             @Override
             protected void paintComponent(Graphics g) 
@@ -247,20 +248,12 @@ public class PasswordsInterface
                 }
             }
         };
-        flashlightPanel.setOpaque(false); // Make the panel transparent
+        interfacePanel.setOpaque(false); // Make the panel transparent
+        interfacePanel.setLayout(null);
 
-        return flashlightPanel;
-    }
-    
-    public static JPanel createInterfacePanel()
-    {
-        interfacePanel = new JPanel();
-        interfacePanel.setOpaque(false);
-        interfacePanel.setLayout(null); 
-        interfacePanel.setFont(new Font("Consolas", Font.BOLD, 25));
         return interfacePanel;
     }
-    
+
     public static JLabel createLocationLabel()
     {
         JLabel locationLabel = new JLabel();
@@ -292,7 +285,26 @@ public class PasswordsInterface
         guidingLabel.setLayout(new FlowLayout());
         return guidingLabel;
     }
+
+    public static JLabel createPasswordText()
+    {
+        passwordText = new JLabel();
+        passwordText.setFont(new Font("Consolas", Font.BOLD, 20));
+        passwordText.setForeground(new Color(255, 255, 255));
+        passwordText.setLayout(new FlowLayout());
+        return passwordText;
+    }
     
+    public static void passwordTextMiddle()
+    {
+        FontMetrics passwordTextMetrics = passwordText.getFontMetrics(passwordText.getFont());
+        passwordTextTextWidth = passwordTextMetrics.stringWidth(passwordText.getText());
+        passwordTextTextHeight = passwordTextMetrics.getHeight();
+   
+        passwordText.setBounds(200, 200, passwordTextTextWidth, passwordTextTextHeight);
+    }
+
+
     public static void passwordLabelMiddle()
     {
         FontMetrics passwordMetrics = passwordLabel.getFontMetrics(passwordLabel.getFont()),
