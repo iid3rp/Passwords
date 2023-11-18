@@ -1,12 +1,13 @@
+import javax.swing.*;
+import javax.swing.JOptionPane.*;
 import java.awt.Toolkit;
 import java.awt.image.*;
 import java.awt.datatransfer.*;
-import javax.swing.*;
-import javax.swing.JOptionPane.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.io.*;
+import java.util.*;
 
 public class PasswordsInterface
 {
@@ -15,17 +16,15 @@ public class PasswordsInterface
     public static JLabel locationLabel;
     public static JLabel passwordLabel;
     public static JLabel guidingLabel;
-    public static JLabel passwordText;
 
     // Static fields go here :3
     private static boolean isDragging = false;
     private static Point offset;
     private static String rawPassword = "";
     private static int passwordTextWidth = 0, guidingTextWidth = 0, passwordCenterX = 0, guidingCenterX = 0, centerY = 0;
-    private static int passwordTextTextWidth = 0, passwordTextTextHeight = 0;
 
     // flashlight thingy
-    private static boolean isFlashlightOn = true;
+    private static boolean isFlashlightOn = false;
     private static Point flashlightCenter = new Point(0, 0);
     private static int flashlightRadius = 100; // Adjust the radius as needed
 
@@ -39,7 +38,6 @@ public class PasswordsInterface
         locationLabel = createLocationLabel();
         passwordLabel = createPasswordLabel();
         guidingLabel = createGuidingLabel();
-        passwordText = createPasswordText();
 
         // Add JLabels to mainMenuPanel
         mainMenuPanel.add(locationLabel);
@@ -103,6 +101,11 @@ public class PasswordsInterface
                         guidingLabel.setText("You can't copy the current password. >:3");
                         passwordLabelMiddle();
                     } 
+                    else if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                    {
+                        PasswordsGame.initializeComponent();
+                        PasswordsGame.start();
+                    }
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
@@ -286,24 +289,6 @@ public class PasswordsInterface
         return guidingLabel;
     }
 
-    public static JLabel createPasswordText()
-    {
-        passwordText = new JLabel();
-        passwordText.setFont(new Font("Consolas", Font.BOLD, 20));
-        passwordText.setForeground(new Color(255, 255, 255));
-        passwordText.setLayout(new FlowLayout());
-        return passwordText;
-    }
-    
-    public static void passwordTextMiddle()
-    {
-        FontMetrics passwordTextMetrics = passwordText.getFontMetrics(passwordText.getFont());
-        passwordTextTextWidth = passwordTextMetrics.stringWidth(passwordText.getText());
-        passwordTextTextHeight = passwordTextMetrics.getHeight();
-   
-        passwordText.setBounds(200, 200, passwordTextTextWidth, passwordTextTextHeight);
-    }
-
 
     public static void passwordLabelMiddle()
     {
@@ -324,6 +309,6 @@ public class PasswordsInterface
     {
         // some stuff here
         // must run at MainMenu.java
-        initializeComponent();
+        initializeComponent(); // you only run this when debugging
     }
 }
