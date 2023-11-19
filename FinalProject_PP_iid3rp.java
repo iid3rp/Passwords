@@ -13,7 +13,7 @@ public class FinalProject_PP_iid3rp // its like the Program.cs but in java yk
 {
     public static void main(String[] args)
     {
-        Application.initializeComponent();
+        InitialFrame.initializeComponent();
         System.out.print(req.stuff[3]);
     }
 }
