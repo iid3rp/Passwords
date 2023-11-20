@@ -17,6 +17,10 @@ public class MainMenu
     // adding JLabels go here
     public static JLabel locationLabel;
     public static JLabel playLabel;
+    public static JLabel passwordsLabel;
+    public static JLabel settingsLabel;
+    public static JLabel achievementsLabel;
+    public static JLabel cautionLabel;
 
     // Static fields go here :3
     public static Point offset;
@@ -28,14 +32,26 @@ public class MainMenu
         mainMenuPanel = createMainMenuPanel();
         cautionPanel = createCautionPanel();
 
-        // Create JLabels
+        // Create JLabels inside mainMenuPanel
         locationLabel = createLocationLabel();
         playLabel = createPlayLabel();
+        passwordsLabel = createPasswordsLabel();
+        settingsLabel = createSettingsLabel();
+        achievementsLabel = createAchievementsLabel();
+        
+        // Create Labels inside cautionPanel
+        cautionLabel = createCautionLabel();
         
 
         // Add JLabels to mainMenuPanel
         mainMenuPanel.add(locationLabel);
         mainMenuPanel.add(playLabel);
+        mainMenuPanel.add(passwordsLabel);
+        mainMenuPanel.add(settingsLabel);
+        mainMenuPanel.add(achievementsLabel);
+        
+        // Add JLabels to cautionPanel
+        cautionPanel.add(cautionLabel);
         
         // initial frame thingy
         InitialFrame.initialFrame.setContentPane(mainMenuPanel);
@@ -52,7 +68,7 @@ public class MainMenu
             }
         });
         
-        cautionPanel.addKeyListener(new KeyAdapter()
+        cautionPanel.addMouseListener(new MouseAdapter()
         {
             public void keyPressed(KeyEvent e)
             {
@@ -118,7 +134,18 @@ public class MainMenu
     
     public static JPanel createMainMenuPanel()
     {
-        mainMenuPanel = new JPanel();
+        ImageIcon backgroundImage = new ImageIcon("Properties/Images/stock-image2.jpg");
+        
+        JPanel mainMenuPanel = new JPanel() 
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        
         mainMenuPanel.setBackground(Color.GRAY);
         mainMenuPanel.setLayout(null);  // Use null layout
         mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
@@ -145,14 +172,54 @@ public class MainMenu
         return locationLabel;
     }
     
+    public static JLabel createPasswordsLabel()
+    {
+        passwordsLabel = new JLabel("Passwords");
+        passwordsLabel.setForeground(new Color(255, 255, 255));
+        passwordsLabel.setFont(new Font("Consolas", Font.BOLD, 100));
+        passwordsLabel.setBounds(100, 100, 700, 200);
+        return passwordsLabel;
+    }
+    
     public static JLabel createPlayLabel()
     {
-        playLabel = new JLabel("PLAY");
-        playLabel.setFont(new Font("Consolas", Font.BOLD, 48));
+        playLabel = new JLabel("Start");
+        playLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
+        playLabel.setForeground(new Color(255, 255, 255));
         playLabel.setForeground(new Color(255, 255, 255));
         playLabel.setLayout(new FlowLayout());
-        playLabel.setBounds(200, 200, 200, 50);
+        playLabel.setBounds(100, 300, 200, 100);
         return playLabel;
+    }
+    
+    public static JLabel createSettingsLabel()
+    {
+        settingsLabel = new JLabel("Settings");
+        settingsLabel.setForeground(new Color(255, 255, 255));
+        settingsLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
+        settingsLabel.setBounds(100, 400, 700, 100);
+        return settingsLabel;
+    }
+
+    public static JLabel createAchievementsLabel()
+    {
+        achievementsLabel = new JLabel("Achievements");
+        achievementsLabel.setForeground(new Color(255, 255, 255));
+        achievementsLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
+        achievementsLabel.setBounds(100, 500, 700, 100);
+        return achievementsLabel;
+    }
+    
+    public static JLabel createCautionLabel()
+    {
+        cautionLabel = new JLabel();
+        cautionLabel.setText("Things to Caution!, Press anything to continue.");
+        cautionLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
+        cautionLabel.setBounds(255, 200, 720, 50);
+        cautionLabel.setForeground(new Color(255, 255, 255));
+        cautionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cautionLabel.setVerticalAlignment(SwingConstants.CENTER);
+        return cautionLabel;
     }
     
     public static void main(String[] args)

@@ -171,7 +171,7 @@ public class PasswordsGame
     
     public static JPanel createInterfacePanel() 
     {
-        JPanel cautionPanel = new JPanel() 
+        JPanel interfacePanel = new JPanel() 
         {
             @Override
             protected void paintComponent(Graphics g) 
@@ -206,8 +206,8 @@ public class PasswordsGame
                 }
             }
         };
-        cautionPanel.setOpaque(false); // Make the panel transparent
-        cautionPanel.setLayout(null);
+        interfacePanel.setOpaque(false); // Make the panel transparent
+        interfacePanel.setLayout(null);
 
         return cautionPanel;
     }
