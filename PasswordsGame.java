@@ -217,7 +217,7 @@ public class PasswordsGame
             }
             else if(isNewPassword)
             {
-                
+                rogue.newPasswordAlgorithm();
             }
             else
             {

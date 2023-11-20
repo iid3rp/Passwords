@@ -11,7 +11,7 @@ import java.util.*;
 
 public class req
 { 
-    public static final String[] stuff=
+    public static final String[] stuff =
     {
         "Must have at least 20 characters minimum.",
         "Must include a space.",
