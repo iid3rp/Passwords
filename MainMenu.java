@@ -53,9 +53,18 @@ public class MainMenu
         // Add JLabels to cautionPanel
         cautionPanel.add(cautionLabel);
         
-        // initial frame thingy
-        InitialFrame.initialFrame.setContentPane(mainMenuPanel);
-        InitialFrame.initialFrame.setGlassPane(cautionPanel);
+        // initial the frame with the current panels you have
+        InitialFrame.initialContentPanel.removeAll();
+        InitialFrame.initialGlassPane.removeAll();
+
+        // Add the new content (in this case, an alternative panel)
+        InitialFrame.initialContentPanel = mainMenuPanel;
+        InitialFrame.initialGlassPane = cautionPanel;
+        
+        // set the panels to the main panel
+        InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
+        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
+        
         cautionPanel.setVisible(true); 
         
         InitialFrame.initialFrame.addKeyListener(new KeyAdapter() 
@@ -63,16 +72,20 @@ public class MainMenu
             @Override
             public void keyPressed(KeyEvent e) 
             {
-                cautionPanel.setEnabled(false);
+                System.out.println("pressed");
                 cautionPanel.setVisible(false);
+                if(e.getKeyCode() == KeyEvent.VK_M)
+                {
+                    PasswordsGame.initializeComponent();
+                }
             }
         });
         
-        cautionPanel.addMouseListener(new MouseAdapter()
+        mainMenuPanel.addKeyListener(new KeyAdapter()
         {
             public void keyPressed(KeyEvent e)
             {
-            
+                
             }
         });
         
@@ -126,10 +139,10 @@ public class MainMenu
         {
             @Override
             public void mouseClicked(MouseEvent e) 
-            {
+            {           
                 PasswordsGame.initializeComponent();
             }
-        });
+        });    
     }
     
     public static JPanel createMainMenuPanel()

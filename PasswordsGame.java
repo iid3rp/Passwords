@@ -28,10 +28,14 @@ public class PasswordsGame
     public static boolean isNewPassword = true;
     public static boolean passwordsStarted = true;
     
+    // window dragging thingy
+    public static Point offset;
+    public static boolean isDragging = false;
+    
     // flashlight thingy
-    public static boolean isFlashlightOn = false;
+    public static boolean isFlashlightOn = true;
     public static Point flashlightCenter = new Point(0, 0);
-    public static int flashlightRadius = 100; // Adjust the radius as needed
+    public static int flashlightRadius = 360; // Adjust the radius as needed
     
     public static void initializeComponent()
     {
@@ -43,6 +47,80 @@ public class PasswordsGame
         passwordText = createPasswordText();
         passwordLabel = createPasswordLabel();
         guidingLabel = createGuidingLabel();
+        
+        // initial the frame with the current panels you have
+        InitialFrame.initialContentPanel = null;
+        InitialFrame.initialGlassPane = null;
+
+        // Add the new content (in this case, an alternative panel)
+        InitialFrame.initialContentPanel = gamePanel;
+        InitialFrame.initialGlassPane = interfacePanel;
+        
+        // set the panels to the main panel
+        InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
+        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
+        
+        interfacePanel.add(passwordLabel);
+        interfacePanel.add(guidingLabel);
+        
+        MainMenu.mainMenuPanel.setVisible(false);
+        MainMenu.cautionPanel.setVisible(false);
+        
+        interfacePanel.setVisible(true);
+        gamePanel.setVisible(true);
+        
+        gamePanel.add(passwordText);
+        gamePanel.add(MainMenu.locationLabel);
+        
+        gamePanel.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mousePressed(MouseEvent e) 
+            {
+                if (SwingUtilities.isLeftMouseButton(e)) 
+                {
+                    isDragging = true;
+                    offset = e.getPoint();
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) 
+            {
+                if (SwingUtilities.isLeftMouseButton(e)) 
+                {
+                    isDragging = false;
+                }
+            }
+        });
+        
+        gamePanel.addMouseMotionListener(new MouseMotionAdapter() 
+        {   
+            @Override
+            public void mouseMoved(MouseEvent e) 
+            {
+                // Update label with the current cursor position
+                MainMenu.locationLabel.setText("Frame Location: (" + e.getX() + ", " + e.getY() + ")");
+                
+                // for the flashlight thingy
+                flashlightCenter = e.getPoint();
+                interfacePanel.repaint();  
+            }
+            
+            @Override
+            public void mouseDragged(MouseEvent e)
+            {
+                if (isDragging)
+                {
+                    Point currentMouse = e.getLocationOnScreen();
+
+                    int deltaX = currentMouse.x - offset.x;
+                    int deltaY = currentMouse.y - offset.y;
+
+                    InitialFrame.initialFrame.setLocation(deltaX, deltaY);
+                }
+            }
+        });
         
         InitialFrame.initialFrame.addKeyListener(new KeyAdapter()
         {
@@ -99,18 +177,6 @@ public class PasswordsGame
                         PasswordsGame.start();
                     }
                 }
-                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
-                {
-                    int result = JOptionPane.showConfirmDialog(InitialFrame.initialFrame,
-                            "Are you sure you want to close the application?",
-                            "Confirm Close",
-                            JOptionPane.YES_NO_OPTION);
-                                
-                    if (result == JOptionPane.YES_OPTION) 
-                    {
-                        System.exit(0);
-                    }
-                } 
                 else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
                 {
                     if (!rawPassword.isEmpty()) 
@@ -162,7 +228,18 @@ public class PasswordsGame
     
     public static JPanel createGamePanel()
     {
-        gamePanel = new JPanel();
+        ImageIcon backgroundImage = new ImageIcon("Properties/Images/stock-image2.jpg");
+        
+        JPanel gamePanel = new JPanel() 
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        
         gamePanel.setOpaque(false);
         gamePanel.setLayout(null);
         gamePanel.setFont(new Font("Consolas", Font.BOLD, 25));
@@ -209,7 +286,7 @@ public class PasswordsGame
         interfacePanel.setOpaque(false); // Make the panel transparent
         interfacePanel.setLayout(null);
 
-        return cautionPanel;
+        return interfacePanel;
     }
     
     public static JLabel createPasswordText()
