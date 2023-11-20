@@ -1,6 +1,11 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+#
 # .gitignore will be existing for the reference of the developer (@iid3rp) is commiting through GitHub or Visual Studio.
+#
+# .gitignore might be merged every GitHub commit twice because the .gitignore is exclusice within Visual Studio but the developer dosent care anyway :3
+#
+# codes were usually compiled thru jGRASP(C) Java IDE and committed.
 ################################################################################
 
 /.vs
