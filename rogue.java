@@ -38,12 +38,36 @@ public class rogue
         }
         requirements[rogueRequirements] = 0;
         
-        System.out.println("Generated Password Requirements:");
-        for (int requirement : requirements) {
-            System.out.println(req.stuff[requirement]);
-        }
+        System.out.println("rogue in progress:");
         
         PasswordsGame.isNewPassword = false;
+    }
+    
+    public static void questionChamber()
+    {
+        int random = rand.nextInt(5);
+        int randomText = rand.nextInt(5);
+        
+        if(random == 0)
+        {
+            switch(randomText)
+            {
+                case 0:
+                    PasswordsGame.chamberLabel.setText("??????");
+                case 1:
+                    PasswordsGame.chamberLabel.setText("Chamber # ???");
+                case 2:
+                    PasswordsGame.chamberLabel.setText("ERWFASBFSFJ");
+                case 3:
+                    PasswordsGame.chamberLabel.setText("idk what's the chamber.");
+                case 4:
+                    PasswordsGame.chamberLabel.setText("........");
+            }
+        }
+        else
+        {
+            PasswordsGame.chamberLabel.setText("Chamber # " + PasswordsGame.chamber);
+        }
     }
     
     public static void main(String[] args)

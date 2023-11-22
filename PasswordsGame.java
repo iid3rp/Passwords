@@ -18,18 +18,19 @@ public class PasswordsGame
     public static JLabel passwordLabel;
     public static JLabel guidingLabel;
     public static JLabel passwordText;
+    public static JLabel chamberLabel;
     public static JLabel otherLabels;
     
     public static int passwordTextTextWidth = 0, passwordTextTextHeight = 0;
     public static int chamber = 0;
     public static int requirement = 0;
+    public static int rogueRequirements = 0;
     
     public static String rawPassword = "";
     public static int passwordTextWidth = 0, guidingTextWidth = 0, passwordCenterX = 0, guidingCenterX = 0, centerY = 0;
     public static boolean isNewPassword = true;
     public static boolean passwordsStarted = true;
     public static boolean isCursorLeft = false;
-    public static boolean isPasswordAgain = false;
     
     // window dragging thingy
     public static Point offset;
@@ -50,6 +51,7 @@ public class PasswordsGame
         passwordText = createPasswordText();
         passwordLabel = createPasswordLabel();
         guidingLabel = createGuidingLabel();
+        chamberLabel = createChamberLabel();
         
         // initial the frame with the current panels you have
         InitialFrame.initialContentPanel = null;
@@ -74,8 +76,7 @@ public class PasswordsGame
         
         gamePanel.add(passwordText);
         gamePanel.add(MainMenu.locationLabel);
-        
-        start();
+        gamePanel.add(chamberLabel);
         
         gamePanel.addMouseListener(new MouseAdapter() 
         {
@@ -209,7 +210,7 @@ public class PasswordsGame
                         else
                         {
                             System.out.print("chamber enter");
-                            PasswordProgress();
+                            passwordProgress();
                         }
                     }
                 } 
@@ -222,6 +223,8 @@ public class PasswordsGame
                 }
             }
         });
+        start();
+        passwordProgress();
     }
     
     public static void start()
@@ -231,40 +234,33 @@ public class PasswordsGame
         passwordTextMiddle();
     }
     
-    public static void PasswordProgress()
+    public static void passwordProgress()
     {
         if(chamber < 1000)
         {
+            rogue.questionChamber();
             if(isNewPassword)
             {
                 rogue.newPasswordAlgorithm();
+                rogueRequirements = rogue.rogueRequirements;
+            } 
+            if(requirement < rogueRequirements)
+            {
+                passwordText.setText(req.stuff[rogue.requirements[requirement]]);
+                requirement++;
             }
             else
             {
-                if(requirement < rogue.rogueRequirements)
-                {
-                    passwordText.setText(req.stuff[rogue.requirements[requirement]]);
-                    if(requirement == rogue.rogueRequirements - 1)
-                    {
-                        isPasswordAgain = true;
-                    }
-                }
-                else
-                {
-                    if(isPasswordAgain)
-                    {
-                        passwordText.setText("input password again.");
-                    }
-                    else
-                    {
-                        isNewPassword = true;
-                        isPasswordAgain = false;
-                    }
-                }
+                passwordText.setText("input password again.");
+                requirement = 0;
+                isNewPassword = true;
             }
             chamber++;
         }
-        chamberOneThousand();
+        else
+        {
+            chamberOneThousand();
+        }
         passwordTextMiddle();
     }
     
@@ -385,7 +381,17 @@ public class PasswordsGame
         guidingLabel.setLayout(new FlowLayout());
         return guidingLabel;
     }
-
+    
+    public static JLabel createChamberLabel()
+    {
+        JLabel chamberLabel = new JLabel();
+        chamberLabel.setFont(new Font("Consolas", Font.BOLD, 48));
+        chamberLabel.setForeground(new Color(255, 255, 255));
+        chamberLabel.setLayout(new FlowLayout());
+        chamberLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        chamberLabel.setBounds(60, 60, 400, 50);
+        return chamberLabel;
+    }
 
     public static void passwordLabelMiddle()
     {
