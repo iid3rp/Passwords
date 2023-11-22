@@ -20,7 +20,7 @@ public class rogue
     
     public static void newPasswordAlgorithm()
     {
-        rogueRequirements = (rand.nextInt(4) + 3);
+        rogueRequirements = (rand.nextInt(3) + 4);
         HashSet<Integer> requirementsHash = new HashSet<Integer>();
         
         for(int i = 0; i < rogueRequirements; i++)
@@ -48,20 +48,27 @@ public class rogue
         int random = rand.nextInt(5);
         int randomText = rand.nextInt(5);
         
+        System.out.print(" " + randomText);
+        
         if(random == 0)
         {
             switch(randomText)
             {
                 case 0:
                     PasswordsGame.chamberLabel.setText("??????");
+                    break;
                 case 1:
                     PasswordsGame.chamberLabel.setText("Chamber # ???");
+                    break;
                 case 2:
                     PasswordsGame.chamberLabel.setText("ERWFASBFSFJ");
+                    break;
                 case 3:
                     PasswordsGame.chamberLabel.setText("idk what's the chamber.");
+                    break;
                 case 4:
                     PasswordsGame.chamberLabel.setText("........");
+                    break;
             }
         }
         else

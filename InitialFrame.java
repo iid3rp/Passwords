@@ -22,6 +22,7 @@ public class InitialFrame
 
     public static void initializeComponent() 
     {
+        SoundEffects.backgroundMusic();
         initialFrame = createInitialFrame();
         initialContentPanel = createInitialContentPanel();
         initialGlassPane = createInitialGlassPane();
