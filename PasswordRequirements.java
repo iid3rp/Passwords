@@ -2,15 +2,15 @@ public class PasswordRequirements
 {
     public static void check(String passwordHolder)
     {
-        passwordLowerCase = passwordHolder.toLowerCase();
-        passwordUpperCase = passwordHolder.toupperCase();
+        String passwordLowerCase = passwordHolder.toLowerCase();
+        String passwordUpperCase = passwordHolder.toUpperCase();
         
-        for(int i = 0; i < /*number holder*/; i++)
+        for(int i = 0; i < rogue.rogueRequirements + 1; i++)
         {
-           switch(/*number holder here*/)
+           switch(i)
            {
                case 1:
-                   case1();
+                   // smth code here :3
                    break; // example
                case 2:
                case 3:
@@ -22,5 +22,10 @@ public class PasswordRequirements
     private static void case1()
     {
         // the code goes here :3
+    }
+    
+    public static void main(String[] args)
+    {
+        // must run at FinalProject.java
     }
 }

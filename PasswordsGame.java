@@ -22,11 +22,14 @@ public class PasswordsGame
     
     public static int passwordTextTextWidth = 0, passwordTextTextHeight = 0;
     public static int chamber = 0;
+    public static int requirement = 0;
     
     public static String rawPassword = "";
     public static int passwordTextWidth = 0, guidingTextWidth = 0, passwordCenterX = 0, guidingCenterX = 0, centerY = 0;
     public static boolean isNewPassword = true;
     public static boolean passwordsStarted = true;
+    public static boolean isCursorLeft = false;
+    public static boolean isPasswordAgain = false;
     
     // window dragging thingy
     public static Point offset;
@@ -72,6 +75,8 @@ public class PasswordsGame
         gamePanel.add(passwordText);
         gamePanel.add(MainMenu.locationLabel);
         
+        start();
+        
         gamePanel.addMouseListener(new MouseAdapter() 
         {
             @Override
@@ -92,6 +97,12 @@ public class PasswordsGame
                     isDragging = false;
                 }
             }
+            
+            public void mouseExited(MouseEvent e) 
+            {
+                isCursorLeft = true;
+                interfacePanel.repaint();
+            }
         });
         
         gamePanel.addMouseMotionListener(new MouseMotionAdapter() 
@@ -99,12 +110,11 @@ public class PasswordsGame
             @Override
             public void mouseMoved(MouseEvent e) 
             {
-                // Update label with the current cursor position
                 MainMenu.locationLabel.setText("Frame Location: (" + e.getX() + ", " + e.getY() + ")");
-                
+                isCursorLeft = false;
                 // for the flashlight thingy
                 flashlightCenter = e.getPoint();
-                interfacePanel.repaint();  
+                interfacePanel.repaint();
             }
             
             @Override
@@ -170,11 +180,6 @@ public class PasswordsGame
                     {
                         guidingLabel.setText("You can't copy the current password. >:3");
                         passwordLabelMiddle();
-                    } 
-                    else if(e.getKeyCode() == KeyEvent.VK_ENTER)
-                    {
-                        PasswordsGame.initializeComponent();
-                        PasswordsGame.start();
                     }
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
@@ -191,6 +196,22 @@ public class PasswordsGame
                         }
                         passwordLabelMiddle();
                     }    
+                }
+                else if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    PasswordRequirements.check(rawPassword);
+                    if(true) // if the password requirement turns true
+                    {
+                        if(false) // if the next password without notice flagged as true
+                        {
+                            // this is for the glitch event
+                        }
+                        else
+                        {
+                            System.out.print("chamber enter");
+                            PasswordProgress();
+                        }
+                    }
                 } 
                 else if(Character.isDefined(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))
                 {
@@ -206,24 +227,45 @@ public class PasswordsGame
     public static void start()
     {
         gamePanel.add(passwordText);
-        passwordText.setText(req.stuff[4]);
+        passwordText.setText("Set your first password! :3");
         passwordTextMiddle();
-        
+    }
+    
+    public static void PasswordProgress()
+    {
         if(chamber < 1000)
         {
-            if(chamber == 0)
-            {
-                startingPoint();
-            }
-            else if(isNewPassword)
+            if(isNewPassword)
             {
                 rogue.newPasswordAlgorithm();
             }
             else
             {
-
+                if(requirement < rogue.rogueRequirements)
+                {
+                    passwordText.setText(req.stuff[rogue.requirements[requirement]]);
+                    if(requirement == rogue.rogueRequirements - 1)
+                    {
+                        isPasswordAgain = true;
+                    }
+                }
+                else
+                {
+                    if(isPasswordAgain)
+                    {
+                        passwordText.setText("input password again.");
+                    }
+                    else
+                    {
+                        isNewPassword = true;
+                        isPasswordAgain = false;
+                    }
+                }
             }
+            chamber++;
         }
+        chamberOneThousand();
+        passwordTextMiddle();
     }
     
     public static JPanel createGamePanel()
@@ -257,29 +299,44 @@ public class PasswordsGame
     
                 if (isFlashlightOn) 
                 {
-                    BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-                    Graphics2D g2d = image.createGraphics();
-            
-                    // Fill the entire image with a black color
-                    g2d.setColor(Color.BLACK);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-            
-                    // Create the circular region
-                    Ellipse2D hole = new Ellipse2D.Double(
-                            flashlightCenter.x - flashlightRadius,
-                            flashlightCenter.y - flashlightRadius,
-                            flashlightRadius * 2,
-                            flashlightRadius * 2
-                    );
-            
-                    // Clear the circular region by setting its pixels to transparent
-                    g2d.setComposite(AlphaComposite.Clear);
-                    g2d.fill(hole);
-            
-                    // Draw the image onto the component
-                    g.drawImage(image, 0, 0, null);
-            
-                    g2d.dispose();
+                    if(!isCursorLeft)
+                    {
+                        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2d = image.createGraphics();
+                
+                        // Fill the entire image with a black color
+                        g2d.setColor(Color.BLACK);
+                        g2d.fillRect(0, 0, getWidth(), getHeight());
+                
+                        // Create the circular region
+                        Ellipse2D hole = new Ellipse2D.Double(
+                                flashlightCenter.x - flashlightRadius,
+                                flashlightCenter.y - flashlightRadius,
+                                flashlightRadius * 2,
+                                flashlightRadius * 2
+                        );
+                
+                        // Clear the circular region by setting its pixels to transparent
+                        g2d.setComposite(AlphaComposite.Clear);
+                        g2d.fill(hole);
+                
+                        // Draw the image onto the component
+                        g.drawImage(image, 0, 0, null);
+                
+                        g2d.dispose();
+                    }
+                    else
+                    {
+                        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2d = image.createGraphics();
+                
+                        // Fill the entire image with a black color
+                        g2d.setColor(Color.BLACK);
+                        g2d.fillRect(0, 0, getWidth(), getHeight());
+                        g.drawImage(image, 0, 0, null);
+                
+                        g2d.dispose();
+                    }
                 }
             }
         };
@@ -345,9 +402,9 @@ public class PasswordsGame
         guidingLabel.setBounds(guidingCenterX, 570, guidingTextWidth, 50);
     }
     
-    public static void startingPoint()
+    public static void chamberOneThousand()
     {
-       
+        // the last bits of this program teehee :3    
     }
     
     public static void main(String[] args)

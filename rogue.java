@@ -5,6 +5,7 @@ public class rogue
 {
     public static final Random rand = new Random();
     public static int[] requirements;
+    public static int rogueRequirements;
 
     public static final Point[][] roguePoints =
     {
@@ -19,7 +20,7 @@ public class rogue
     
     public static void newPasswordAlgorithm()
     {
-        int rogueRequirements = (rand.nextInt(4) + 4);
+        rogueRequirements = (rand.nextInt(4) + 3);
         HashSet<Integer> requirementsHash = new HashSet<Integer>();
         
         for(int i = 0; i < rogueRequirements; i++)
@@ -28,18 +29,21 @@ public class rogue
             requirementsHash.add(rogueNumber);
         }
 
-        int[] requirements = new int[requirementsHash.size()];
+        requirements = new int[requirementsHash.size() + 1];
         
         int index = 0;
         for(int i : requirementsHash)
         {
             requirements[index++] = i;
         }
+        requirements[rogueRequirements] = 0;
         
         System.out.println("Generated Password Requirements:");
         for (int requirement : requirements) {
             System.out.println(req.stuff[requirement]);
         }
+        
+        PasswordsGame.isNewPassword = false;
     }
     
     public static void main(String[] args)

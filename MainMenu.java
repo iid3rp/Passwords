@@ -65,7 +65,7 @@ public class MainMenu
         InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
         InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
         
-        cautionPanel.setVisible(true); 
+        cautionPanel.setVisible(true);    
         
         InitialFrame.initialFrame.addKeyListener(new KeyAdapter() 
         {
