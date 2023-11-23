@@ -26,8 +26,6 @@ public class InitialFrame
         initialFrame = createInitialFrame();
         initialContentPanel = createInitialContentPanel();
         initialGlassPane = createInitialGlassPane();
-         
-        initialFrame.setVisible(true);
 
         initialFrame.addKeyListener(new KeyAdapter() 
         {
@@ -48,8 +46,11 @@ public class InitialFrame
                 }
             }
         });
-
-        MainMenu.initializeComponent();
+        
+        SwingUtilities.invokeLater(() -> 
+        {
+            initialFrame.setVisible(true);
+        });
     }
 
     private static JFrame createInitialFrame() 
@@ -57,6 +58,7 @@ public class InitialFrame
         initialFrame = new JFrame("Passwords");
         initialFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initialFrame.setSize(1280, 720);
+        initialFrame.setForeground(new Color(0, 0, 0));
         initialFrame.setUndecorated(true);
         initialFrame.setLocationRelativeTo(null);
         return initialFrame;

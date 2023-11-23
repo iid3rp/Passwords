@@ -246,7 +246,7 @@ public class PasswordsGame
             } 
             if(requirement < rogueRequirements)
             {
-                passwordText.setText(req.stuff[rogue.requirements[requirement]]);
+                passwordText.setText(arrays.stuff[rogue.requirements[requirement]]);
                 requirement++;
             }
             else

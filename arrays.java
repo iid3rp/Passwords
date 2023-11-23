@@ -425,7 +425,7 @@ public class arrays
     {
         "sweet", "chocolate", "cake", "pie",
         "pudding", "tart", "custard", "gelato",
-        "icecream", "brownie", "cookie" "mousse",
+        "icecream", "brownie", "cookie", "mousse",
         "fudge", "cupcake", "donut", "sorbet", "creme",
         "cheesecake", "pastry", "truffle", "meringue",
         "fruit", "sugar", "caramel", "whippedcream",
@@ -547,7 +547,7 @@ public class arrays
         "syria", "taiwan", "tajikistan", "tanzania", "thailand",
         "timor-leste", "togo", "tonga", "trinidadandtobago", "tunisia",
         "turkey", "turkmenistan", "tuvalu", "uganda", "ukraine",
-        "unitedarabemirates", "unitedkingdom", "unitedstates", "usa" "uruguay", "uzbekistan",
+        "unitedarabemirates", "unitedkingdom", "unitedstates", "usa", "uruguay", "uzbekistan",
         "vanuatu", "vaticancity", "venezuela", "vietnam", "yemen",
         "zambia", "zimbabwe"
     };

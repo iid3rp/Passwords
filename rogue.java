@@ -25,7 +25,7 @@ public class rogue
         
         for(int i = 0; i < rogueRequirements; i++)
         {
-            int rogueNumber = rand.nextInt(req.stuff.length);
+            int rogueNumber = rand.nextInt(arrays.stuff.length);
             requirementsHash.add(rogueNumber);
         }
 

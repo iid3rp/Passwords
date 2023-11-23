@@ -13,7 +13,10 @@ public class FinalProject_PP_iid3rp // its like the Program.cs but in java yk
 {
     public static void main(String[] args)
     {
-        InitialFrame.initializeComponent();
-        System.out.print(req.stuff[3]);
+        SwingUtilities.invokeLater(() -> 
+        {
+            new InitialFrame().initializeComponent();
+        });
+        System.out.print(arrays.stuff[3]);
     }
 }

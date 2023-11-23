@@ -41,7 +41,6 @@ public class MainMenu
         
         // Create Labels inside cautionPanel
         cautionLabel = createCautionLabel();
-        
 
         // Add JLabels to mainMenuPanel
         mainMenuPanel.add(locationLabel);
@@ -63,9 +62,7 @@ public class MainMenu
         
         // set the panels to the main panel
         InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
-        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
-        
-        cautionPanel.setVisible(true);    
+        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);  
         
         InitialFrame.initialFrame.addKeyListener(new KeyAdapter() 
         {
@@ -74,10 +71,6 @@ public class MainMenu
             {
                 System.out.println("pressed");
                 cautionPanel.setVisible(false);
-                if(e.getKeyCode() == KeyEvent.VK_M)
-                {
-                    PasswordsGame.initializeComponent();
-                }
             }
         });
         
@@ -139,10 +132,18 @@ public class MainMenu
         {
             @Override
             public void mouseClicked(MouseEvent e) 
-            {           
-                PasswordsGame.initializeComponent();
+            {     
+                cautionLabel.setText("Loading...");
+                cautionPanel.setVisible(true);      
+                SwingUtilities.invokeLater(() -> 
+                {
+                    PasswordsGame.initializeComponent();
+                });
             }
-        });    
+        }); 
+
+        cautionPanel.setVisible(true);
+        mainMenuPanel.setVisible(true);     
     }
     
     public static JPanel createMainMenuPanel()
