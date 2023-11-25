@@ -22,10 +22,30 @@ public class InitialFrame
 
     public static void initializeComponent() 
     {
-        SoundEffects.backgroundMusic();
+        // create things
         initialFrame = createInitialFrame();
         initialContentPanel = createInitialContentPanel();
         initialGlassPane = createInitialGlassPane();
+
+        //  make them visible
+        initialFrame.setVisible(true);
+        initialContentPanel.setVisible(true);
+        initialGlassPane.setVisible(true);
+
+        // sound effects
+        SoundEffects.backgroundMusic();
+        
+        MainMenu.initializeComponent();
+    }
+
+    private static JFrame createInitialFrame() 
+    {
+        initialFrame = new JFrame("Passwords");
+        initialFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initialFrame.setSize(1280, 720);
+        initialFrame.setForeground(new Color(0, 0, 0));
+        initialFrame.setUndecorated(true);
+        initialFrame.setLocationRelativeTo(null);
 
         initialFrame.addKeyListener(new KeyAdapter() 
         {
@@ -47,21 +67,6 @@ public class InitialFrame
             }
         });
         
-        initialFrame.setVisible(true);
-        initialContentPanel.setVisible(true);
-        initialGlassPane.setVisible(true);
-        
-        MainMenu.initializeComponent();
-    }
-
-    private static JFrame createInitialFrame() 
-    {
-        initialFrame = new JFrame("Passwords");
-        initialFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initialFrame.setSize(1280, 720);
-        initialFrame.setForeground(new Color(0, 0, 0));
-        initialFrame.setUndecorated(true);
-        initialFrame.setLocationRelativeTo(null);
         return initialFrame;
     }
     
