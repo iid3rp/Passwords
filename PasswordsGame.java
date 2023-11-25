@@ -78,61 +78,6 @@ public class PasswordsGame
         gamePanel.add(MainMenu.locationLabel);
         gamePanel.add(chamberLabel);
         
-        gamePanel.addMouseListener(new MouseAdapter() 
-        {
-            @Override
-            public void mousePressed(MouseEvent e) 
-            {
-                if (SwingUtilities.isLeftMouseButton(e)) 
-                {
-                    isDragging = true;
-                    offset = e.getPoint();
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) 
-            {
-                if (SwingUtilities.isLeftMouseButton(e)) 
-                {
-                    isDragging = false;
-                }
-            }
-            
-            public void mouseExited(MouseEvent e) 
-            {
-                isCursorLeft = true;
-                interfacePanel.repaint();
-            }
-        });
-        
-        gamePanel.addMouseMotionListener(new MouseMotionAdapter() 
-        {   
-            @Override
-            public void mouseMoved(MouseEvent e) 
-            {
-                MainMenu.locationLabel.setText("Frame Location: (" + e.getX() + ", " + e.getY() + ")");
-                isCursorLeft = false;
-                // for the flashlight thingy
-                flashlightCenter = e.getPoint();
-                interfacePanel.repaint();
-            }
-            
-            @Override
-            public void mouseDragged(MouseEvent e)
-            {
-                if (isDragging)
-                {
-                    Point currentMouse = e.getLocationOnScreen();
-
-                    int deltaX = currentMouse.x - offset.x;
-                    int deltaY = currentMouse.y - offset.y;
-
-                    InitialFrame.initialFrame.setLocation(deltaX, deltaY);
-                }
-            }
-        });
-        
         InitialFrame.initialFrame.addKeyListener(new KeyAdapter()
         {
             public void keyPressed(KeyEvent e)
@@ -281,6 +226,63 @@ public class PasswordsGame
         gamePanel.setOpaque(false);
         gamePanel.setLayout(null);
         gamePanel.setFont(new Font("Consolas", Font.BOLD, 25));
+
+        gamePanel.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mousePressed(MouseEvent e) 
+            {
+                if (SwingUtilities.isLeftMouseButton(e)) 
+                {
+                    isDragging = true;
+                    offset = e.getPoint();
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) 
+            {
+                if (SwingUtilities.isLeftMouseButton(e)) 
+                {
+                    isDragging = false;
+                }
+            }
+            
+            public void mouseExited(MouseEvent e) 
+            {
+                isCursorLeft = true;
+                interfacePanel.repaint();
+            }
+        });
+        
+        gamePanel.addMouseMotionListener(new MouseMotionAdapter() 
+        {   
+            @Override
+            public void mouseMoved(MouseEvent e) 
+            {
+                MainMenu.locationLabel.setText("Frame Location: (" + e.getX() + ", " + e.getY() + ")");
+                isCursorLeft = false;
+                // for the flashlight thingy
+                flashlightCenter = e.getPoint();
+                interfacePanel.repaint();
+            }
+            
+            @Override
+            public void mouseDragged(MouseEvent e)
+            {
+                if (isDragging)
+                {
+                    Point currentMouse = e.getLocationOnScreen();
+
+                    int deltaX = currentMouse.x - offset.x;
+                    int deltaY = currentMouse.y - offset.y;
+
+                    InitialFrame.initialFrame.setLocation(deltaX, deltaY);
+                }
+            }
+        });
+
+        
         return gamePanel;
     }
     
