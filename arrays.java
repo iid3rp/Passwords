@@ -43,7 +43,7 @@ public class arrays
         "Should incorporate a Phillipine Island.",
         "Include a country.",
         "Password must include the square root symbol.",
-        "Should contain an a, b algebraic exxpression."
+        "Should contain an a, b algebraic exxpression.",
         "Must reference a well-known mathematical constant in words.",
         "Password should have at least one number of the factor of 12.",
         "Must include with three consecutive counting numbers.",

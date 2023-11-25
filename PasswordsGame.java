@@ -37,7 +37,7 @@ public class PasswordsGame
     public static boolean isDragging = false;
     
     // flashlight thingy
-    public static boolean isFlashlightOn = true;
+    public static boolean isFlashlightOn = false;
     public static Point flashlightCenter = new Point(0, 0);
     public static int flashlightRadius = 360; // Adjust the radius as needed
     

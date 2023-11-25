@@ -47,10 +47,11 @@ public class InitialFrame
             }
         });
         
-        SwingUtilities.invokeLater(() -> 
-        {
-            initialFrame.setVisible(true);
-        });
+        initialFrame.setVisible(true);
+        initialContentPanel.setVisible(true);
+        initialGlassPane.setVisible(true);
+        
+        MainMenu.initializeComponent();
     }
 
     private static JFrame createInitialFrame() 

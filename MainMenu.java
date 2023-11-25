@@ -41,16 +41,6 @@ public class MainMenu
         
         // Create Labels inside cautionPanel
         cautionLabel = createCautionLabel();
-
-        // Add JLabels to mainMenuPanel
-        mainMenuPanel.add(locationLabel);
-        mainMenuPanel.add(playLabel);
-        mainMenuPanel.add(passwordsLabel);
-        mainMenuPanel.add(settingsLabel);
-        mainMenuPanel.add(achievementsLabel);
-        
-        // Add JLabels to cautionPanel
-        cautionPanel.add(cautionLabel);
         
         // initial the frame with the current panels you have
         InitialFrame.initialContentPanel.removeAll();
@@ -81,6 +71,38 @@ public class MainMenu
                 
             }
         });
+        
+        // Add JLabels to mainMenuPanel
+        mainMenuPanel.add(locationLabel);
+        mainMenuPanel.add(playLabel);
+        mainMenuPanel.add(passwordsLabel);
+        mainMenuPanel.add(settingsLabel);
+        mainMenuPanel.add(achievementsLabel);
+        
+        // Add JLabels to cautionPanel
+        cautionPanel.add(cautionLabel);
+
+        cautionPanel.setVisible(true);
+        mainMenuPanel.setVisible(true);     
+    }
+    
+    public static JPanel createMainMenuPanel()
+    {
+        ImageIcon backgroundImage = new ImageIcon("Properties/Images/stock-image2.jpg");
+        
+        JPanel mainMenuPanel = new JPanel() 
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        
+        mainMenuPanel.setBackground(Color.GRAY);
+        mainMenuPanel.setLayout(null);  // Use null layout
+        mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
         
         mainMenuPanel.addMouseListener(new MouseAdapter() 
         {
@@ -128,41 +150,6 @@ public class MainMenu
             }
         });
         
-        playLabel.addMouseListener(new MouseAdapter() 
-        {
-            @Override
-            public void mouseClicked(MouseEvent e) 
-            {     
-                cautionLabel.setText("Loading...");
-                cautionPanel.setVisible(true);      
-                SwingUtilities.invokeLater(() -> 
-                {
-                    PasswordsGame.initializeComponent();
-                });
-            }
-        }); 
-
-        cautionPanel.setVisible(true);
-        mainMenuPanel.setVisible(true);     
-    }
-    
-    public static JPanel createMainMenuPanel()
-    {
-        ImageIcon backgroundImage = new ImageIcon("Properties/Images/stock-image2.jpg");
-        
-        JPanel mainMenuPanel = new JPanel() 
-        {
-            @Override
-            protected void paintComponent(Graphics g) 
-            {
-                super.paintComponent(g);
-                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-        
-        mainMenuPanel.setBackground(Color.GRAY);
-        mainMenuPanel.setLayout(null);  // Use null layout
-        mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
         return mainMenuPanel;
     }
     
@@ -200,9 +187,33 @@ public class MainMenu
         playLabel = new JLabel("Start");
         playLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
         playLabel.setForeground(new Color(255, 255, 255));
-        playLabel.setForeground(new Color(255, 255, 255));
         playLabel.setLayout(new FlowLayout());
         playLabel.setBounds(100, 300, 200, 100);
+        
+        playLabel.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                playLabel.setForeground(new Color(255, 0, 0));
+                System.out.println("mouse");
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                playLabel.setForeground(new Color(255, 255, 255));
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                cautionLabel.setText("Loading...");
+                cautionPanel.setVisible(true);
+                PasswordsGame.initializeComponent();
+            }
+        }); 
+        
         return playLabel;
     }
     
