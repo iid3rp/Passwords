@@ -183,7 +183,7 @@ public class PasswordRequirements
                 }
                 case 15:
                 {
-                    for(int i = 0; i < text.length(); i++)
+                    for(int i = 0; i < passwordLowerCase.length(); i++)
                     {
                         if(Character.getNumericValue(integerPassword.charAt(i)) == 2 ||
                            Character.getNumericValue(integerPassword.charAt(i)) == 3 ||
@@ -198,11 +198,11 @@ public class PasswordRequirements
                 case 16:
                 {
                     String operators = "+-*x/\u00F7";
-                    for(int i = 0; i < text.length(); i++)
+                    for(int i = 0; i < passwordLowerCase.length(); i++)
                     {
                         for(int j = 0; j < operators.length(); j++)
                         {
-                            if(text.charAt(i) == operators.charAt(j))
+                            if(passwordLowerCase.charAt(i) == operators.charAt(j))
                             {
                                 nextBoolean[toggler] = true;
                                 break;
@@ -212,14 +212,14 @@ public class PasswordRequirements
                 }
                 case 17:
                 {
-                    for(int i = 0; i < text.length(); i++)
+                    for(int i = 0; i < passwordLowerCase.length(); i++)
                     {
-                        if(Character.isDigit(text.charAt(i)))
+                        if(Character.isDigit(passwordLowerCase.charAt(i)))
                         {
-                            if(text.charAt(i + 1) == '/')
+                            if(passwordLowerCase.charAt(i + 1) == '/')
                             {
-                                if(Character.isDigit(text.charAt(i + 2)) && 
-                                   text.charAt(i + 2) != 0)
+                                if(Character.isDigit(passwordLowerCase.charAt(i + 2)) && 
+                                   passwordLowerCase.charAt(i + 2) != 0)
                                 {
                                     nextBoolean[toggler] = true;
                                     break;
@@ -231,10 +231,10 @@ public class PasswordRequirements
                 case 18: // rogue random vowel placement (might recheck this issue later)
                 {
                     int randomPlacedVowel = 0;
-                    passwordLowerCase = text.toLowerCase();
+                    passwordLowerCase = passwordLowerCase.toLowerCase();
                     if(randomPlacedVowel == 0)
                     {
-                        randomPlacedVowel = rand.nextInt(text.length());
+                        randomPlacedVowel = rand.nextInt(passwordLowerCase.length());
                         return;
                     }
                     else
@@ -254,7 +254,7 @@ public class PasswordRequirements
                 {
                     for(int i = 0; i < arrays.punctuation.length; i++)
                     {
-                        if(text.contains(punctuation[i]))
+                        if(passwordLowerCase.contains(punctuation[i]))
                         {
                             nextBoolean[toggler] = true;
                             break;
@@ -266,7 +266,7 @@ public class PasswordRequirements
                     String vowel = "aeiou";
                     for(int i = 0; i < vowel.length(); i++)
                     {
-                        if(text.charAt(0) == vowel.charAt(i))
+                        if(passwordLowerCase.charAt(0) == vowel.charAt(i))
                         {
                             nextBoolean[toggler] = true;
                             break;
@@ -314,7 +314,7 @@ public class PasswordRequirements
                         String threeLetters = alphabet.charAt(i) + "" +
                                               alphabet.charAt(i + 1) + "" +
                                               alphabet.charAt(i + 2);
-                        if(text.contains(threeLetters))
+                        if(passwordLowerCase.contains(threeLetters))
                         {
                             nextBoolean[toggler] = true;
                             break;
