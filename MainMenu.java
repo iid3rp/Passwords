@@ -52,25 +52,7 @@ public class MainMenu
         
         // set the panels to the main panel
         InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
-        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);  
-        
-        InitialFrame.initialFrame.addKeyListener(new KeyAdapter() 
-        {
-            @Override
-            public void keyPressed(KeyEvent e) 
-            {
-                System.out.println("pressed");
-                cautionPanel.setVisible(false);
-            }
-        });
-        
-        mainMenuPanel.addKeyListener(new KeyAdapter()
-        {
-            public void keyPressed(KeyEvent e)
-            {
-                
-            }
-        });
+        InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
         
         // Add JLabels to mainMenuPanel
         mainMenuPanel.add(locationLabel);
@@ -82,6 +64,7 @@ public class MainMenu
         // Add JLabels to cautionPanel
         cautionPanel.add(cautionLabel);
 
+        // making the panels to be visible
         cautionPanel.setVisible(true);
         mainMenuPanel.setVisible(true);     
     }
@@ -89,7 +72,6 @@ public class MainMenu
     public static JPanel createMainMenuPanel()
     {
         ImageIcon backgroundImage = new ImageIcon("Properties/Images/stock-image2.jpg");
-        
         JPanel mainMenuPanel = new JPanel() 
         {
             @Override
@@ -134,7 +116,6 @@ public class MainMenu
                 // Update label with the current cursor position
                 MainMenu.locationLabel.setText("Frame Location: (" + e.getX() + ", " + e.getY() + ")");
             }
-            
             @Override
             public void mouseDragged(MouseEvent e)
             {
@@ -223,6 +204,29 @@ public class MainMenu
         settingsLabel.setForeground(new Color(255, 255, 255));
         settingsLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
         settingsLabel.setBounds(100, 400, 700, 100);
+
+        settingsLabel.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                settingsLabel.setForeground(new Color(255, 0, 0));
+                System.out.println("mouse");
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                settingsLabel.setForeground(new Color(255, 255, 255));
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                
+            }
+        }); 
+        
         return settingsLabel;
     }
 
@@ -232,6 +236,29 @@ public class MainMenu
         achievementsLabel.setForeground(new Color(255, 255, 255));
         achievementsLabel.setFont(new Font("Consolas", Font.PLAIN, 48));
         achievementsLabel.setBounds(100, 500, 700, 100);
+
+        achievementsLabel.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                achievementsLabel.setForeground(new Color(255, 0, 0));
+                System.out.println("mouse");
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                achievementsLabel.setForeground(new Color(255, 255, 255));
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                
+            }
+        });
+        
         return achievementsLabel;
     }
     
