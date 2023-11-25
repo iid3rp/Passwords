@@ -200,7 +200,7 @@ public class PasswordsGame
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
-                    PasswordRequirements.check(rawPassword);
+                    //PasswordRequirements.check(rawPassword); this is just a test
                     if(true) // if the password requirement turns true
                     {
                         if(false) // if the next password without notice flagged as true
