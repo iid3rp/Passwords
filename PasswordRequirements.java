@@ -530,24 +530,13 @@ public class PasswordRequirements
                 }
                 case 43:
                 {
-                    for(int i = 0; i < arrays..length; i++)
-                    {
-                        if(passwordLowerCase.contains(i))
-                        {
-                            nextBoolean[toggler] = true;
-                            break;
-                        }
-                    }
-                }
-                case 44:
-                {
                     if(passwordHolder % 2 == 0)
                     {
                         nextBoolean[toggler] = true;\
                         break;
                     }
                 }
-                case 45:
+                case 44:
                 {
                     for(char c : passwordHolder.toCharArray())
                     {
@@ -558,7 +547,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 46:
+                case 45:
                 {
                     String symbols = "!@#$";
                     for(int i = 0; i < symbols.length(); i++)
@@ -575,7 +564,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 47:
+                case 46:
                 {
                     int totalSum = 0;
                     for(int i = 0; i < passwordHolder.length(); i++)
@@ -589,7 +578,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 48:
+                case 47:
                 {
                     for(int i = 0; i < passwordHolder.length(); i++)
                     {
@@ -600,7 +589,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 49:
+                case 48:
                 {
                     if(passwordLowerCase.contains("nile"))
                     {
@@ -608,7 +597,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 50:
+                case 49:
                 {
                     for(int i = 0; i < arrays.breakfast.length; i++)
                     {
@@ -619,7 +608,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 52:
+                case 50:
                 {
                     for(int i = 0; i < arrays.italianDishes.length; i++)
                     {
@@ -630,7 +619,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 53:
+                case 51:
                 {
                     if(passwordLowerCase.contains("st") ||
                        passwordLowerCase.contains("vill") ||
@@ -642,29 +631,18 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 55:
+                case 52:
                 {
                     for(int i = 0; i < arrays.fictionalDetetctive.length; i++)
                     {
-                        if(passwordLowerCase.contains(fictionalDetetctive[i]))
+                        if(passwordLowerCase.contains(arrays.fictionalDetetctive[i]))
                         {
                             nextBoolean[toggler] = true;
                             break;
                         }
                     }
                 }
-                case 56:
-                {
-                    for(int i = 0; i < passwordLowerCase.length(); i++)
-                    {
-                        if(passwordLowerCase.contains(fictionalDetetctive[i]))
-                        {
-                            nextBoolean[toggler] = true;
-                            break;
-                        }
-                    }
-                }
-                case 57:
+                case 53:
                 {
                     for (char c : inputString.toCharArray()) 
                     {
@@ -675,7 +653,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 58:
+                case 54:
                 {
                     for (int i = 0; i < arrays.historicalEvent.length; i++) 
                     {
@@ -686,8 +664,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 58: // continue fixing here derp :3
-                // dont stress yourself okay? you love some1 right?
+                case 55: 
                 {
                     for (int i = 0; i < arrays.shakespearePlay.length; i++) 
                     {
@@ -698,7 +675,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 59:
+                case 56:
                 {
                     for (int i = 0; i < arrays.naturalPhenomenon.length; i++) 
                     {
@@ -709,7 +686,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 60:
+                case 57:
                 {
                     for (int i = 0; i < arrays.geometricShape.length; i++) 
                     {
@@ -720,7 +697,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 61:
+                case 58:
                 {
                     for (int i = 0; i < arrays.scientist.length; i++) 
                     {
@@ -731,7 +708,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 62:
+                case 59:
                 {
                     for (int i = 0; i < arrays.gemstone.length; i++) 
                     {
@@ -742,7 +719,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 63:
+                case 60:
                 {
                     for (int i = 0; i < arrays.prime20to100.length; i++) 
                     {
@@ -753,7 +730,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 64:
+                case 61:
                 {
                     for (int i = 0; i < arrays.mathSeries.length; i++) 
                     {
@@ -764,7 +741,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 65:
+                case 62:
                 {
                     for (int i = 0; i < passwordLowerCase.length(); i++) 
                     {
@@ -778,7 +755,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 66:
+                case 63:
                 {
                     if(passwordLowerCase.contains('\u222B') ||
                        passwordLowerCase.contains('\u2202'))
@@ -786,7 +763,7 @@ public class PasswordRequirements
                         nextBoolean = true;
                     }
                 }
-                case 66:
+                case 64:
                 {
                     for(int i = 0; i < arrays.linearAlgebra.length; i++)
                     {
@@ -797,7 +774,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 67:
+                case 65:
                 {
                     if(passwordLowerCase.contains('<') ||
                        passwordLowerCase.contains('>') ||
@@ -809,7 +786,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 68:
+                case 66:
                 {
                     if(Character.isLetter(passwordLowerCase.charAt(0)))
                     {
@@ -817,7 +794,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 69:
+                case 67:
                 {
                     for(int i = 0; i < 23; i++)
                     {
@@ -830,7 +807,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 70:
+                case 68:
                 {
                     if(passwordLowerCase.contains('?') ||
                        passwordLowerCase.contains('!'))
@@ -843,8 +820,18 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 71:
+                case 69:
                 {
+                    for(int i = 0; i < passwordLowerCase.length(); i++)
+                    {
+                        if(passwordLowerCase. ||)
+                            // yeah yeah this will be fixed somehow...
+                    }
+                }
+                case 70:    
+                {
+                    // Password ends with a number where the first number are the number of vowels and next 
+                    //number are the number of consonants in the password 
                     int vowelLetters = 0, consonantLetters = 0
                     for(int i = 0; i < passwordHolder.length(); i++)
                     {
@@ -865,7 +852,7 @@ public class PasswordRequirements
                         break;
                     }                                                            
                 }    
-                case 72:
+                case 71:
                 {
                     String equationRegex = ".*[0-9]+[\\+\\-\\*/]+[0-9]+.*";
                     Pattern pattern = Pattern.compile(equationRegex);
@@ -877,7 +864,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 73:
+                case 72:
                 {
                     for(int i = 0; i < arrays.spicyCuisine.length; i++)
                     {
@@ -888,9 +875,9 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 74:
+                case 73:
                 {
-                    String oldTypeChar = "¶¢£¥½¼¾ƒæœ¶¡¿";
+                    String oldTypeChar = "Â¶Â¢Â£Â¥Â½Â¼Â¾ÂƒÃ¦ÂœÂ¶Â¡Â¿";
                     for (int i = 0; i < oldTypeChar.length(); i++) 
                     {
                         if(passwordLowerCase.contains(String.valueOf(oldTypeChar.charAt(i)))
@@ -900,7 +887,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 75:
+                case 74:
                 {
                     for(int i = 0; i < arrays.fibonacci.length; i++)
                     {
@@ -911,7 +898,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 76:
+                case 75:
                 {
                     if (passwordHolder.charAt(0) == 'a' ||
                         passwordHolder.charAt(0) == 'e' ||
@@ -930,7 +917,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 77:
+                case 76:
                 {
                     for(int i = 0; i < arrays.famousArtists.length; i++)
                     {
@@ -941,7 +928,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 78:
+                case 77:
                 {
                     for(int i = 0; i < arrays.ancientMythWords.length; i++)
                     {
@@ -952,7 +939,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 79:
+                case 78:
                 {
                     for(int i = 0; i < arrays.javaWords.length; i++)
                     {
@@ -963,7 +950,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 80:
+                case 79:
                 {
                     for(int i = 0; i < arrays.planets.length; i++)
                     {
@@ -974,7 +961,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 81:
+                case 80:
                 {
                     for(int i = 0; i < arrays.novelsNoVowels.length; i++)
                     {
@@ -985,7 +972,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 82:
+                case 81:
                 {
                     for(int i = 0; i < arrays.famousBuildings.length; i++)
                     {
@@ -996,7 +983,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 83:
+                case 82:
                 {
                     for(int i = 0; i < arrays.famousPopCulture.length; i++)
                     {
@@ -1007,7 +994,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 84:
+                case 83:
                 {
                     for(int i = 0; i < arrays.songHot100.length; i++)
                     {
@@ -1018,7 +1005,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 85:
+                case 84:
                 {
                     for(int i = 0; i < arrays.famousActors.length; i++)
                     {
@@ -1029,7 +1016,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 86:
+                case 85:
                 {
                     for(int i = 0; i < arrays.internetTrend2018.length; i++)
                     {
@@ -1040,7 +1027,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 87:
+                case 86:
                 {
                     for(int i = 0; i < arrays.sportingEvent.length; i++)
                     {
@@ -1051,7 +1038,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 88:
+                case 87:
                 {
                     for(int i = 0; i < arrays.famousTV.length; i++)
                     {
@@ -1062,7 +1049,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 89:
+                case 88:
                 {
                     for(int i = 0; i < arrays.mathTheorem.length; i++)
                     {
@@ -1073,7 +1060,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 90:
+                case 89:
                 {
                     for(int i = 0; i < arrays.famousMathematicians.length; i++)
                     {
@@ -1084,7 +1071,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 91:
+                case 90:
                 {
                     if(passwordHolder.contains(":3"))
                     {
@@ -1092,7 +1079,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 92:
+                case 91:
                 {
                     for (int i = 0; i < arrays.calculusPrinciple.length; i++)
                     {
@@ -1103,7 +1090,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 93:
+                case 92:
                 {
                     for (int i = 0; i < arrays.highMath.length; i++)
                     {
@@ -1114,7 +1101,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 94:
+                case 93:
                 {
                     for (int i = 0; i < arrays.complexGeom.length; i++)
                     {
@@ -1125,7 +1112,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 95:
+                case 94:
                 {
                     for (int i = 0; i < arrays.greekLetter.length; i++)
                     {
@@ -1136,7 +1123,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 96:
+                case 95:
                 {
                     for (int i = 0; i < arrays.commonAbbrev.length; i++)
                     {
@@ -1147,7 +1134,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 97:
+                case 96:
                 {
                     for (int i = 0; i < arrays.punctuation.length; i++)
                     {
@@ -1168,7 +1155,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 98:
+                case 97:
                 {
                     if(passwordHolder.charAt(0) == passwordUpperCase.charAt(0))
                     {
@@ -1180,7 +1167,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 99:
+                case 98:
                 {
                     for(int i = 0; i < passwordHolder.length() - 3; i++)
                     {
@@ -1194,7 +1181,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 100:
+                case 99:
                 {
                     for (int i = 0; i < arrays.femalePopArtistsBack.length; i++)
                     {
@@ -1205,7 +1192,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 101:
+                case 100:
                 {
                     String pi = "3141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067";
                     for (int i = 0; i < pi.length() - 10; i++)
@@ -1226,7 +1213,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 102:
+                case 101:
                 {
                     for (int i = 0; i < arrays.urlWords.length; i++)
                     {
@@ -1237,7 +1224,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 103:
+                case 102:
                 {
                     for (int i = 0; i < arrays.chocolateNoVowel.length; i++)
                     {
@@ -1248,7 +1235,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 104:
+                case 103:
                 {
                     for (int i = 0; i < arrays.boardBackwards.length; i++)
                     {
@@ -1259,7 +1246,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 105:
+                case 104:
                 {
                     if(passwordLowerCase.contains("f=ma"))
                     {
@@ -1267,7 +1254,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 106:
+                case 105:
                 {
                     for (int i = 0; i < arrays..quarantine.length; i++)
                     {
@@ -1278,7 +1265,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 107:
+                case 106:
                 {
                     for (int i = 0; i < arrays.astrophysicsWords.length; i++)
                     {
@@ -1289,7 +1276,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 108:
+                case 107:
                 {
                     for (int i = 0; i < arrays.quantumMechWords.length; i++)
                     {
@@ -1300,7 +1287,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 109:
+                case 108:
                 {
                     for (int i = 0; i < arrays.renownedMath.length; i++)
                     {
@@ -1311,7 +1298,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 110:
+                case 109:
                 {
                     for (int i = 0; i < arrays.cultureTraditionSEA.length; i++)
                     {
@@ -1322,7 +1309,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 111:
+                case 110:
                 {
                     for (int i = 0; i < arrays.filoIndigenous.length; i++)
                     {
@@ -1333,7 +1320,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 112:
+                case 111:
                 {
                     for (int i = 0; i < arrays.periodicBack.length; i++)
                     {
@@ -1344,7 +1331,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 113:
+                case 112:
                 {
                     for (int i = 0; i < arrays.operationWords.length; i++)
                     {
@@ -1355,7 +1342,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 114:
+                case 1143:
                 {
                     for (int i = 0; i < arrays.abstractAlgebra.length; i++)
                     {
@@ -1366,7 +1353,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 115:
+                case 114:
                 {
                     for (int i = 0; i < arrays.unsolvedMath.length; i++)
                     {
@@ -1377,7 +1364,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 116:
+                case 115:
                 {
                     for (int i = 0; i < arrays.topology.length; i++)
                     {
@@ -1387,7 +1374,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 117:
+                case 116:
                 {
                     for (int i = 0; i < arrays.length; i++)
                     {
@@ -1397,7 +1384,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 118:
+                case 117:
                 {
                     for (int i = 0; i < arrays.length; i++)
                     {
@@ -1407,7 +1394,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 119:
+                case 118:
                 {
                     for (int i = 0; i < arrays.length; i++)
                     {
