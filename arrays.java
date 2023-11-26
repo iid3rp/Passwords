@@ -76,7 +76,7 @@ public class arrays
         /* case 66*/  "Cannot start with a letter.",  
         /* case 67*/  "Must have three consecutive letters of the alphabet.",  
         /* case 68*/  "Password should include a ? or ! but not both.",  
-        /* case 69*/  "Cannot contain more than two vowels in sequence.",  
+        /* case 69*/  "Password must contain more than two vowels in succession.",  
         /* case 70*/  "Password ends with a number where the first number are the number of vowels and next number are the number of consonants in the password.",  
         /* case 71*/  "Must contain a basic equation using regex.",  
         /* case 72*/  "Your password should reference a spicy cuisine.",  
