@@ -16,16 +16,16 @@ public class PasswordRequirements
             }
             switch(i)
             {
-                case 0:
+                case 0: // Must have at least 20 characters minimum.
                 {
                     if(passwordHolder.length() >= 20)
                     {
                         nextBoolean[toggler] = true;
                         return;
                     }
-                    break; // example
+                    break;
                 }
-                case 1:
+                case 1: // Must include a space
                 {
                     for(int i = 0; i < passwordHolder.length(); i++)
                     {
@@ -36,7 +36,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 2:
+                case 2: // Needs to contain a fruit, but spelled backward.
                 {
                     for(int i = 0; i < arrays.reversedFruits.length; i++)
                     {
@@ -47,7 +47,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 3:
+                case 3: // "Your password must reference an animal that's commonly kept as a pet.
                 {
                     for(int i = 0; i < arrays.pets.length; i++)
                     {
@@ -58,7 +58,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 4:
+                case 4: // Should have a type of bread embedded in it.
                 {
                     for(int i = 0; i < arrays.breads.length; i++)
                     {
@@ -69,7 +69,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 5:
+                case 5: // Must include a Capital letter
                 {
                     for(int i = 0; i < passwordHolder.length(); i++)
                     {
@@ -80,7 +80,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 6:
+                case 6: // Must contain the name of a primary color
                 {
                     if(passwordHolder.contains("red") ||
                        passwordHolder.contains("yellow") ||
@@ -89,7 +89,7 @@ public class PasswordRequirements
                         nextBoolean[toggler] = true;
                     }
                 }
-                case 7:
+                case 7: // Password should reference a common household appliance
                 {
                     for(int i = 0; i < arrays.appliances.length; i++)
                     {
@@ -100,24 +100,24 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 8:
+                case 8: // Must have an even number of letters
                 {
                     if((passwordHolder.length() % 2) == 0)
                     {
                         nextBoolean[toggler] = true;
                     }
                 }
-                case 9:
+                case 9: // Password should start with a consonant and end with a vowel.
                 {
-                    String consonant = "bcdfghjklmnpqrstvwxyz",
-                           vowel = "aeiou";
+                    String consonant = "bcdfghjklmnpqrstvwxyz";
+                    String vowel = "aeiou";
                     for(int i = 0; i < consonant.length(); i++)
                     {
                         if(passwordHolder.charAt(0) == consonant.charAt(i))
                         {
                             for(int j = 0; j < vowel.length(); j++)
                             {
-                                if(passwordHolder.charAt(passwordHolder.length()-1) == vowel.charAt(i))
+                                if(passwordHolder.charAt(passwordHolder.length() - 1) == vowel.charAt(j)) // Fix here
                                 {
                                     nextBoolean[toggler] = true;
                                     break;
@@ -126,7 +126,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 10:
+                case 10: // Must mention any footwear
                 {
                     for(int i = 0; i < arrays.footwear.length; i++)
                     {
@@ -137,7 +137,7 @@ public class PasswordRequirements
                        }
                     }
                 }
-                case 11:
+                case 11: // nclude the name of a thing that typically comes in pairs
                 {
                     for(int i = 0; i < arrays.pairedItems.length; i++)
                     {
@@ -148,7 +148,7 @@ public class PasswordRequirements
                        }
                     }
                 }
-                case 12:
+                case 12: // Password must contain the word of a human organ
                 {
                     for(int i = 0; i < arrays.humanOrganArray.length; i++)
                     {
@@ -159,43 +159,50 @@ public class PasswordRequirements
                        }
                     }
                 }
-                case 13:
+                case 13: // Must include a number divisible by 2
                 {
-                    int graspNum = Integer.parseInt(passwordHolder.replaceAll("[^0-9]", ""));
-                    // haha get it? jGRASP? haha
-                    // didnt even know i put this variable in september
-                    if(graspNum % 2 == 0)
+                    for (int i = 0; i < passwordHolder.length(); i++)
                     {
-                        nextBoolean[toggler] = true;
+                        char currentChar = passwordHolder.charAt(i);
+                        if (Character.isDigit(currentChar))
+                        {
+                            int digit = Character.getNumericValue(currentChar);
+                            if (digit % 2 == 0)
+                            {
+                                nextBoolean[toggler] = true;
+                                break;
+                            }
+                        }
                     }
                 }
-                case 14:
+                case 14: // Password should include a two-digit square number.
                 {
-                    for(int i = 0; i < passwordHolder.length() - 1; i++)
+                    for (int i = 0; i < passwordHolder.length() - 1; i++)
                     {
                         int twoDigit = Integer.parseInt("" + passwordHolder.charAt(i) + passwordHolder.charAt(i + 1));
-                        if((int) Math.sqrt(twoDigit) * (int)Math.sqrt(twoDigit) == twoDigit)
+                        int sqrt = (int) Math.sqrt(twoDigit);
+
+                        if (sqrt * sqrt == twoDigit)
                         {
                             nextBoolean[toggler] = true;
                             break;
                         }
                     }
                 }
-                case 15:
+                case 15: // Needs to have a single-digit prime number.
                 {
-                    for(int i = 0; i < passwordLowerCase.length(); i++)
+                    String primeDigits = "2357";
+
+                    for (int i = 0; i < primeDigits.length(); i++)
                     {
-                        if(Character.getNumericValue(integerPassword.charAt(i)) == 2 ||
-                           Character.getNumericValue(integerPassword.charAt(i)) == 3 ||
-                           Character.getNumericValue(integerPassword.charAt(i)) == 5 ||
-                           Character.getNumericValue(integerPassword.charAt(i)) == 7)
+                        if (passwordHolder.contains(String.valueOf(primeDigits.charAt(i))))
                         {
                             nextBoolean[toggler] = true;
                             break;
                         }
                     }
                 }
-                case 16:
+                case 16: // Must contain an arithmetic operator
                 {
                     String operators = "+-*x/\u00F7";
                     for(int i = 0; i < passwordLowerCase.length(); i++)
@@ -210,7 +217,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 17:
+                case 17: // Password should include a common fraction
                 {
                     for(int i = 0; i < passwordLowerCase.length(); i++)
                     {
@@ -219,7 +226,7 @@ public class PasswordRequirements
                             if(passwordLowerCase.charAt(i + 1) == '/')
                             {
                                 if(Character.isDigit(passwordLowerCase.charAt(i + 2)) && 
-                                   passwordLowerCase.charAt(i + 2) != 0)
+                                   passwordLowerCase.charAt(i + 2) != '0')
                                 {
                                     nextBoolean[toggler] = true;
                                     break;
@@ -250,7 +257,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 19:
+                case 19: // Must include at least one punctuation mark.
                 {
                     for(int i = 0; i < arrays.punctuation.length; i++)
                     {
@@ -261,9 +268,9 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 20:
+                case 20: // Must start with a consonant
                 {
-                    String vowel = "aeiou";
+                    String consonant = "bcdfghjklmnpqrstvwxyz";
                     for(int i = 0; i < vowel.length(); i++)
                     {
                         if(passwordLowerCase.charAt(0) == vowel.charAt(i))
@@ -398,11 +405,15 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 32:
+                case 32: // Must contain a color and its opposite from the color wheel
                 {
-                    for(int i = 0; i < arrays.bodiesOfWater.length; i++)
+                    for (String colorPair : arrays.colorPairs)
                     {
-                        if(passwordLowerCase.contains(arrays.bodiesOfWater[i]))
+                        String[] colors = colorPair.split(":");
+                        String color1 = colors[0];
+                        String color2 = colors[1];
+
+                        if (passwordLowerCase.contains(color1) && passwordLowerCase.contains(color2))
                         {
                             nextBoolean[toggler] = true;
                             break;
@@ -459,17 +470,6 @@ public class PasswordRequirements
                 }
                 case 38:
                 {
-                    for(int i = 0; i < arrays..length; i++)
-                    {
-                        if(passwordLowerCase.contains(i))
-                        {
-                            nextBoolean[toggler] = true;
-                            break;
-                        }
-                    }
-                }
-                case 39:
-                {
                     String trimmed = passwordLowerCase.trim();
                     if(trimmed.contains("a+b") ||
                        trimmed.contains("a-b") ||
@@ -482,7 +482,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 40:
+                case 39:
                 {
                     for(int i = 0; i < arrays.constantWords.length; i++)
                     {
@@ -493,7 +493,7 @@ public class PasswordRequirements
                         }
                     }
                 }  
-                case 41:
+                case 40:
                 {
                     if(passwordLowerCase.contains('1') ||
                        passwordLowerCase.contains('2') ||
@@ -505,7 +505,7 @@ public class PasswordRequirements
                         nextBoolean[toggler] = true;
                     }
                 }
-                case 42:
+                case 41:
                 {
                     for(int i = 0; i < 100; i++)
                     {
@@ -519,7 +519,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 43:
+                case 42:
                 {
                     if(passwordLowerCase.contains("31415") ||
                        passwordLowerCase.contains("27182"))
@@ -528,7 +528,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 44:
+                case 43:
                 {
                     for(int i = 0; i < arrays..length; i++)
                     {
@@ -539,7 +539,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 45:
+                case 44:
                 {
                     if(passwordHolder % 2 == 0)
                     {
@@ -547,7 +547,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 46:
+                case 45:
                 {
                     for(char c : passwordHolder.toCharArray())
                     {
@@ -558,7 +558,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 47:
+                case 46:
                 {
                     String symbols = "!@#$";
                     for(int i = 0; i < symbols.length(); i++)
@@ -575,7 +575,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 48:
+                case 47:
                 {
                     int totalSum = 0;
                     for(int i = 0; i < passwordHolder.length(); i++)
@@ -589,7 +589,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 49:
+                case 48:
                 {
                     for(int i = 0; i < passwordHolder.length(); i++)
                     {
@@ -600,7 +600,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 50:
+                case 49:
                 {
                     if(passwordLowerCase.contains("nile"))
                     {
@@ -608,7 +608,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 51:
+                case 50:
                 {
                     for(int i = 0; i < arrays.breakfast.length; i++)
                     {
@@ -642,7 +642,7 @@ public class PasswordRequirements
                         break;
                     }
                 }
-                case 54:
+                case 55:
                 {
                     for(int i = 0; i < arrays.fictionalDetetctive.length; i++)
                     {
@@ -653,7 +653,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 55:
+                case 56:
                 {
                     for(int i = 0; i < passwordLowerCase.length(); i++)
                     {
@@ -664,7 +664,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 56:
+                case 57:
                 {
                     for (char c : inputString.toCharArray()) 
                     {
@@ -675,7 +675,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 57:
+                case 58:
                 {
                     for (int i = 0; i < arrays.historicalEvent.length; i++) 
                     {
@@ -686,7 +686,8 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 58:
+                case 58: // continue fixing here derp :3
+                // dont stress yourself okay? you love some1 right?
                 {
                     for (int i = 0; i < arrays.shakespearePlay.length; i++) 
                     {
