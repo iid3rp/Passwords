@@ -112,7 +112,7 @@ public class arrays
         /* case 102*/  "Must include a type of chocolate but with all vowels removed.",  
         /* case 103*/  "Should hint at a popular board game, but spelled in reverse.",  
         /* case 104*/  "Must be formatted as a equation for Force",  
-        /* case 105*/  "Include a word that references quarantine. but not "quarantine"",  
+        /* case 105*/  "Include a word that references quarantine. but not \'quarantine\'",  
         /* case 106*/  "Password must contain a term from astrophysics.",  
         /* case 107*/  "Should reference a concept from quantum mechanics.",  
         /* case 108*/  "Must hint at a renowned mathematical theorem.",  

@@ -13,6 +13,7 @@ public class MainMenu
 {
     public static JPanel mainMenuPanel;
     public static JPanel cautionPanel;
+    public static JPanel settingsPanel;
     
     // adding JLabels go here
     public static JLabel locationLabel;
@@ -21,6 +22,7 @@ public class MainMenu
     public static JLabel settingsLabel;
     public static JLabel achievementsLabel;
     public static JLabel cautionLabel;
+    public static JLabel settingsLabel1;
 
     // Static fields go here :3
     public static Point offset;
@@ -31,6 +33,7 @@ public class MainMenu
     {
         mainMenuPanel = createMainMenuPanel();
         cautionPanel = createCautionPanel();
+        settingsPanel = createSettingsPanel();
 
         // Create JLabels inside mainMenuPanel
         locationLabel = createLocationLabel();
@@ -54,19 +57,23 @@ public class MainMenu
         InitialFrame.initialFrame.setContentPane(InitialFrame.initialContentPanel);
         InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
         
-        // Add JLabels to mainMenuPanel
-        mainMenuPanel.add(locationLabel);
-        mainMenuPanel.add(playLabel);
-        mainMenuPanel.add(passwordsLabel);
-        mainMenuPanel.add(settingsLabel);
-        mainMenuPanel.add(achievementsLabel);
-        
         // Add JLabels to cautionPanel
         cautionPanel.add(cautionLabel);
 
         // making the panels to be visible
         cautionPanel.setVisible(true);
         mainMenuPanel.setVisible(true);     
+        
+        InitialFrame.initialFrame.addKeyListener(new KeyAdapter() 
+        {
+            @Override
+            public void keyPressed(KeyEvent e) 
+            {
+                cautionPanel.setVisible(false);
+                // Add stuff to mainMenuPanel
+                mainMenuShow();
+            }
+        });
     }
     
     public static JPanel createMainMenuPanel()
@@ -81,8 +88,6 @@ public class MainMenu
                 g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
-        
-        mainMenuPanel.setBackground(Color.GRAY);
         mainMenuPanel.setLayout(null);  // Use null layout
         mainMenuPanel.setFont(new Font("Consolas", Font.BOLD, 25));
         
@@ -136,12 +141,52 @@ public class MainMenu
     
     public static JPanel createCautionPanel() 
     {
-        JPanel cautionPanel = new JPanel(); 
-        cautionPanel.setBackground(Color.GRAY);
-        cautionPanel.setOpaque(true); // Make the panel transparent
+        JPanel cautionPanel = new JPanel() 
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = image.createGraphics();
+                
+                // Fill the entire image with a black color
+                g2d.setColor(new Color(70, 35, 1, 150));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g.drawImage(image, 0, 0, null);
+                
+                g2d.dispose();
+            }
+        };
+        cautionPanel.setOpaque(false);
         cautionPanel.setLayout(null);
 
         return cautionPanel;
+    }
+    
+    public static JPanel createSettingsPanel()
+    {
+        settingsPanel = new JPanel()
+        {
+            @Override
+            protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+                BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = image.createGraphics();
+                
+                // Fill the entire image with a black color
+                g2d.setColor(new Color(70, 35, 1, 150));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g.drawImage(image, 0, 0, null);
+                
+                g2d.dispose();
+            }
+        };
+        settingsPanel.setOpaque(false);
+        settingsPanel.setLayout(null);
+        
+        return settingsPanel;
     }
 
     public static JLabel createLocationLabel()
@@ -223,7 +268,10 @@ public class MainMenu
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                
+                InitialFrame.initialContentPanel.removeAll();
+                InitialFrame.initialGlassPane = settingsPanel;
+                InitialFrame.initialFrame.setGlassPane(InitialFrame.initialGlassPane);
+                settingsPanel.setVisible(true);
             }
         }); 
         
@@ -279,5 +327,14 @@ public class MainMenu
         // some stuff here
         // must run at MainMenu.java
         initializeComponent(); // you only run this when debugging
+    }
+    
+    public static void mainMenuShow()
+    {
+        mainMenuPanel.add(locationLabel);
+        mainMenuPanel.add(playLabel);
+        mainMenuPanel.add(passwordsLabel);
+        mainMenuPanel.add(settingsLabel);
+        mainMenuPanel.add(achievementsLabel);
     }
 }

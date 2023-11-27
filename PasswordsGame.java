@@ -52,10 +52,6 @@ public class PasswordsGame
         passwordLabel = createPasswordLabel();
         guidingLabel = createGuidingLabel();
         chamberLabel = createChamberLabel();
-        
-        // initial the frame with the current panels you have
-        InitialFrame.initialContentPanel = null;
-        InitialFrame.initialGlassPane = null;
 
         // Add the new content (in this case, an alternative panel)
         InitialFrame.initialContentPanel = gamePanel;

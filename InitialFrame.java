@@ -54,17 +54,26 @@ public class InitialFrame
             {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) 
                 {
-                    int result = JOptionPane.showConfirmDialog(initialFrame,
-                            "Are you sure you want to close the application?",
-                            "Confirm Close",
-                            JOptionPane.YES_NO_OPTION);
-
-                    if (result == JOptionPane.YES_OPTION) 
+                    if(!(initialGlassPane == MainMenu.settingsPanel))
                     {
-                        System.exit(0);
+                        int result = JOptionPane.showConfirmDialog(initialFrame,
+                                "Are you sure you want to close the application?",
+                                "Confirm Close",
+                                JOptionPane.YES_NO_OPTION);
+    
+                        if (result == JOptionPane.YES_OPTION) 
+                        {
+                            System.exit(0);
+                        }
+                    }
+                    else
+                    {
+                        initialGlassPane = null;
+                        MainMenu.mainMenuShow();
+                        MainMenu.settingsPanel.setVisible(false);
                     }
                 }
-                System.out.print("clicked."); // debugging
+                System.out.println("clicked."); // debugging
             }
         });
         
