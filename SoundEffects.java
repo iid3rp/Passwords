@@ -11,7 +11,7 @@ public class SoundEffects
         // maybe itll be implemented for reference
         try
         {
-            File soundFile = new File("Properties\\Audio\\campfire-reference.wav");
+            File soundFile = new File("Properties\\Audio\\Dawn_of_the_Doors.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             backgroundAudio = AudioSystem.getClip();
             backgroundAudio.open(audioInputStream);
