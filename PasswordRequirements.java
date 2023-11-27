@@ -313,7 +313,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 24:
+                case 24: // "The password should contain three ascending alphabetical letters in a row.
                 {
                     String alphabet = "abcdefghijklmnopqrstuvwxyz";
                     for(int i = 0; i < alphabet.length() - 2; i++)
@@ -457,7 +457,7 @@ public class PasswordRequirements
                         if(passwordLowerCase.contains(arrays.countries[i]))
                         {
                             nextBoolean[toggler] = true;
-                            break;  // No need to continue checking if we found a match.
+                            break; 
                         }
                     }
                 }
@@ -547,16 +547,16 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 45:
+                case 45: // Must include at least two of these symbols: !, @, #, $.
                 {
                     String symbols = "!@#$";
-                    for(int i = 0; i < symbols.length(); i++)
+                    for (int i = 0; i < symbols.length(); i++)
                     {
-                        for(int j = 0; j < symbols.length(); i++)
+                        for (int j = 0; j < symbols.length(); j++)  // Fix: Increment j instead of i
                         {
-                            if(passwordLowerCase.contains("" + 
-                                                          symbols.charAt(i) +
-                                                          symbold.charAt(j))
+                            if (passwordLowerCase.contains("" + 
+                                                            symbols.charAt(i) +
+                                                            symbols.charAt(j)))  // Fix: Add closing parenthesis
                             {
                                 nextBoolean[toggler] = true;
                                 break;
@@ -564,7 +564,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 46:
+                case 46: // Password must worth 8000 unicode amount.
                 {
                     int totalSum = 0;
                     for(int i = 0; i < passwordHolder.length(); i++)
@@ -572,7 +572,7 @@ public class PasswordRequirements
                         totalSum += passwordHolder.codePointAt(i);
                     }
 
-                    if(totalSum == 8000)
+                    if(totalSum >= 8000)
                     {
                         nextBoolean[toggler] = true;
                         break;
@@ -828,30 +828,33 @@ public class PasswordRequirements
                             // yeah yeah this will be fixed somehow...
                     }
                 }
-                case 70:    
+                case 70:
                 {
-                    // Password ends with a number where the first number are the number of vowels and next 
-                    //number are the number of consonants in the password 
-                    int vowelLetters = 0, consonantLetters = 0
-                    for(int i = 0; i < passwordHolder.length(); i++)
+                    // Password ends with a number where the first number is the number of vowels and the next 
+                    // number is the number of consonants in the password 
+                    int vowelLetters = 0, consonantLetters = 0;
+                    for (int i = 0; i < passwordHolder.length(); i++)
                     {
-                        if(passwordHolder.charAt(i) == 'a' ||
-                           passwordHolder.charAt(i) == 'e' ||
-                           passwordHolder.charAt(i) == 'i' ||
-                           passwordHolder.charAt(i) == 'o' ||
-                           passwordHolder.charAt(i) == 'u')
+                        if (passwordHolder.charAt(i) == 'a' ||
+                            passwordHolder.charAt(i) == 'e' ||
+                            passwordHolder.charAt(i) == 'i' ||
+                            passwordHolder.charAt(i) == 'o' ||
+                            passwordHolder.charAt(i) == 'u')
                         {
                             vowelLetters++;
                         }
-                        else consonantLetters++;
+                        else
+                        {
+                            consonantLetters++;
+                        }
                     }
-                    if(passwordLowerCase.contains("" + wowelLetters +
-                                                  "" + consonantLetters))
+                    if (passwordLowerCase.contains("" + vowelLetters +
+                                                   "" + consonantLetters))
                     {
                         nextBoolean[toggler] = true;
                         break;
-                    }                                                            
-                }    
+                    }
+                }
                 case 71:
                 {
                     String equationRegex = ".*[0-9]+[\\+\\-\\*/]+[0-9]+.*";
@@ -898,7 +901,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 75:
+                case 75: // Should start with a vowel and end with a consonant.
                 {
                     if (passwordHolder.charAt(0) == 'a' ||
                         passwordHolder.charAt(0) == 'e' ||
@@ -1192,7 +1195,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 100:
+                case 100: // Must contain ten consecutive digits of the first 100 digits of pi.
                 {
                     String pi = "3141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067";
                     for (int i = 0; i < pi.length() - 10; i++)
@@ -1342,7 +1345,7 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 1143:
+                case 113: // ???
                 {
                     for (int i = 0; i < arrays.abstractAlgebra.length; i++)
                     {
@@ -1374,13 +1377,14 @@ public class PasswordRequirements
                         }
                     }
                 }
-                case 116:
+                case 116: // Requires a non-Latin script character.
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < passwordLowerCase.length(); i++)
                     {
-                        if (passwordLowerCase.contains(arrays.[i]))
+                        if (!(passwordLowerCase.charAt(i) >= 'a' && passwordLowerCase.charAt(i) <= 'z'))
                         {
                             nextBoolean[toggler] = true;
+                            break;
                         }
                     }
                 }
@@ -1396,9 +1400,9 @@ public class PasswordRequirements
                 }
                 case 118:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.musicalCharacter.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.musicalCharacter.[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1406,29 +1410,37 @@ public class PasswordRequirements
                 }
                 case 120:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    int capitalLetters = 0;
+                    for (int i = 0; i < passwordHolder.length(); i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if(passwordHolder.charAt(i) == passwordUpperCase.charAt(i))
                         {
-                            nextBoolean[toggler] = true;
+                            capitalLetters++;
                         }
+                    }
+
+                    if((double) capitalLetters / passwordHolder.length() == (double) 1 / 3)
+                    {
+                        nextBoolean[toggler] = true;
+                        break;
                     }
                 }
                 case 121:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.scientificFormulas.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.scientificFormulas[i]))
                         {
                             nextBoolean[toggler] = true;
+                            break;
                         }
                     }
                 }
                 case 122:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.musicGenres.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.musicGenres[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1436,19 +1448,20 @@ public class PasswordRequirements
                 }
                 case 123:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.boardGameMorse.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.boardGameMorse[i]))
                         {
                             nextBoolean[toggler] = true;
+                            break;
                         }
                     }
                 }
                 case 124:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.bsitBTMCipher.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.bsitBTMCipher[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1456,9 +1469,9 @@ public class PasswordRequirements
                 }
                 case 125:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.tsRed.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.tsRed[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1466,9 +1479,9 @@ public class PasswordRequirements
                 }
                 case 126:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.cardShape.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.cardShape[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1476,9 +1489,9 @@ public class PasswordRequirements
                 }
                 case 127:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.philosophy.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.philosophy[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1486,9 +1499,9 @@ public class PasswordRequirements
                 }
                 case 128:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.emotions.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.emotions[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1496,9 +1509,9 @@ public class PasswordRequirements
                 }
                 case 129:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.neurobiology.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.neurobiology[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1506,9 +1519,9 @@ public class PasswordRequirements
                 }
                 case 130:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.lingPheno.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.lingPheno.[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1516,9 +1529,9 @@ public class PasswordRequirements
                 }
                 case 131:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.rareMeteor.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.rareMeteor[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1526,9 +1539,9 @@ public class PasswordRequirements
                 }
                 case 132:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.itemAntique.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.itemAntique[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1536,9 +1549,9 @@ public class PasswordRequirements
                 }
                 case 133:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.jupiterMoons.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.jupiterMoons[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1546,9 +1559,9 @@ public class PasswordRequirements
                 }
                 case 134:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.emailAddress.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.emailAddress.[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1556,9 +1569,9 @@ public class PasswordRequirements
                 }
                 case 135:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.biologicalNameScientific.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.biologicalNameScientific[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1566,9 +1579,9 @@ public class PasswordRequirements
                 }
                 case 136:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.scienceTheorem.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.scienceTheorem[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1576,9 +1589,9 @@ public class PasswordRequirements
                 }
                 case 137:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.zodiacSigns.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.zodiacSigns[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1586,9 +1599,9 @@ public class PasswordRequirements
                 }
                 case 138:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.collegeAbbrev.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.collegeAbbrev[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1596,9 +1609,9 @@ public class PasswordRequirements
                 }
                 case 139:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.programmingWords.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.programmingWords[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1606,19 +1619,19 @@ public class PasswordRequirements
                 }
                 case 140:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.reptiles.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.reptiles[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
                     }
                 }
-                case 141:
+                case 141: // must contain a suffix at the end
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.suffix.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.suffix[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
@@ -1626,95 +1639,102 @@ public class PasswordRequirements
                 }
                 case 142:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.mathTopic.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.mathTopic[i]))
                         {
                             nextBoolean[toggler] = true;
+                            break;
                         }
                     }
                 }
                 case 143:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.geometricCharacter.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.geometricCharacter[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
                     }
                 }
-                case 144:
+                case 144: // Must begin and end with a unicode arrow character.
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    char[] arrowDirections = {'\u2191', '\u2190', '\u2193', '\u2192'};
+                    for (char arrow1 : arrowDirections) 
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordHolder.startsWith(String.valueOf(arrow1))) 
                         {
-                            nextBoolean[toggler] = true;
-                        }
+                            for(char arrow2 : arrowDirections)
+                            {
+                                if (passwordHolder.endsWith(String.valueOf(arrow2))) 
+                                {
+                                    nextBoolean[toggler] = true;
+                                    break;
+                                }
+                            }
+                        }   
                     }
                 }
                 case 145:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    if(passwordLowerCase.contains("r3d") ||
+                       passwordLowerCase.contains("bl43") ||
+                       passwordLowerCase.contains("bl63") ||
+                       passwordLowerCase.contains("y3ll0w"))
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
-                        {
-                            nextBoolean[toggler] = true;
-                        }
+                        nextBoolean[toggler] = true;
+                        break;
                     }
                 }
                 case 146:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    if(passwordHolder.contains("{") && passwordHolder.contains("}"))
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        nextBoolean[toggler] = true;
+                        break;
+                    }
+                }
+                case 147: // Should contain a word where letters are in alphabetical order.
+                {
+                    for (int i = 0; i < arrays.wordsAlphabetic.length; i++)
+                    {
+                        if (passwordLowerCase.contains(arrays.wordsAlphabetic[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
                     }
                 }
-                case 147:
+                case 148: // Password must be a palindrome (alphanumeric characters only)
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    String alphanumericPassword = passwordHolder.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+                    boolean isPalindrome = true;
+
+                    for (int i = 0; i < alphanumericPassword.length() / 2; i++) 
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (alphanumericPassword.charAt(i) != alphanumericPassword.charAt(alphanumericPassword.length() - 1 - i)) 
                         {
-                            nextBoolean[toggler] = true;
+                            isPalindrome = false;
+                            break;
                         }
                     }
-                }
-                case 148:
-                {
-                    for (int i = 0; i < arrays.length; i++)
+
+                    if (isPalindrome) 
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
-                        {
-                            nextBoolean[toggler] = true;
-                        }
+                        nextBoolean[toggler] = true;
+                        break;
                     }
                 }
                 case 149:
                 {
-                    for (int i = 0; i < arrays.length; i++)
+                    for (int i = 0; i < arrays.bsitBTM.length; i++)
                     {
-                        if (passwordLowerCase.contains(arrays[i]))
+                        if (passwordLowerCase.contains(arrays.bsitBTM[i]))
                         {
                             nextBoolean[toggler] = true;
                         }
                     }
                 }
-                case 150:
-                {
-                    for (int i = 0; i < arrays.length; i++)
-                    {
-                        if (passwordLowerCase.contains(arrays[i]))
-                        {
-                            nextBoolean[toggler] = true;
-                        }
-                    }
-                }
-
                 default:
             }
             if()

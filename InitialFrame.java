@@ -64,7 +64,7 @@ public class InitialFrame
                         System.exit(0);
                     }
                 }
-                System.out.print("clicked.") // debugging
+                System.out.print("clicked."); // debugging
             }
         });
         
