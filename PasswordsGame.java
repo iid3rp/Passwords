@@ -120,7 +120,14 @@ public class PasswordsGame
                     }    
                     else if(e.getKeyCode() == KeyEvent.VK_C)
                     {
-                        guidingLabel.setText("You can't copy the current password. >:3");
+                        // copy the current password requirement (arrays.stuff[requirement])
+                        // Assuming arrays.stuff[requirement] is a String
+                        String currentRequirement = arrays.stuff[rogue.requirements[requirement - 1]];
+                        StringSelection stringSelection = new StringSelection(currentRequirement);
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(stringSelection, null);
+                        
+                        guidingLabel.setText("Password requirement copied to clipboard.");
                         passwordLabelMiddle();
                     }
                 }
@@ -141,11 +148,11 @@ public class PasswordsGame
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
-                    PasswordRequirements.check(rawPassword); // this is just a test
-                    if(PasswordRequirements.nextBoolean[2]) // if the password requirement turns true
-                    {
+                    // PasswordRequirements.check(rawPassword); // this is just a test
+                    // if(PasswordRequirements.nextBoolean[2]) // if the password requirement turns true
+                    // {
                         passwordProgress();
-                    }
+                    // }
                 } 
                 else if(Character.isDefined(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))
                 {
