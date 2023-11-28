@@ -348,13 +348,13 @@ public class arrays
         "ear", "ears", "nose", "noses", "tongue", "tongues"
     };    
 
-    public static char[] punctuation = 
+    public static String[] punctuation = 
     {
-        '.', ',', ':', ';', '!', '?', '-', '\u2014', '\u2013', '(',
-        ')', '{', '}', '[', ']', '<', '>', '\\', '/', '|',
-        '&', '@', '#', '$', '%', '^', '*', '+', '=',
-        '~', '`', '"', '\'', '\u2026',
-        '(', ')', '{', '}', '[', ']', '<', '>', '&', '@', '#', '$', '%', '^', '*', '+', '='
+        ".", ",", ":", ";", "!", "?", "-", "\u2014", "\u2013", "(",
+        ")", "{", "}", "[", "]", "<", ">", "\\", "/", "|",
+        "&", "@", "#", "$", "%", "^", "*", "+", "=",
+        "~", "`", "\"", "'", "\u2026",
+        "(", ")", "{", "}", "[", "]", "<", ">", "&", "@", "#", "$", "%", "^", "*", "+", "="
         // Add more punctuation characters as needed
     };
 
@@ -550,6 +550,17 @@ public class arrays
         "unitedarabemirates", "unitedkingdom", "unitedstates", "usa", "uruguay", "uzbekistan",
         "vanuatu", "vaticancity", "venezuela", "vietnam", "yemen",
         "zambia", "zimbabwe"
+    };
+    
+    public static String[] colorPairs = 
+    {
+        "red:green", "green:red",
+        "blue:orange", "orange:blue",
+        "yellow:purple", "purple:yellow",
+        "cyan:magenta", "magenta:cyan",
+        "black:white", "white:black",
+        "gray:brown", "brown:gray"
+        // Add more color pairs as needed
     };
     
     public static void main(String[] args)

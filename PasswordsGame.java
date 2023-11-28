@@ -141,18 +141,10 @@ public class PasswordsGame
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
-                    //PasswordRequirements.check(rawPassword); this is just a test
-                    if(true) // if the password requirement turns true
+                    PasswordRequirements.check(rawPassword); // this is just a test
+                    if(PasswordRequirements.nextBoolean[2]) // if the password requirement turns true
                     {
-                        if(false) // if the next password without notice flagged as true
-                        {
-                            // this is for the glitch event
-                        }
-                        else
-                        {
-                            System.out.print("chamber enter");
-                            passwordProgress();
-                        }
+                        passwordProgress();
                     }
                 } 
                 else if(Character.isDefined(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))

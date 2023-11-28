@@ -29,14 +29,13 @@ public class rogue
             requirementsHash.add(rogueNumber);
         }
 
-        requirements = new int[requirementsHash.size() + 1];
+        requirements = new int[requirementsHash.size()];
         
         int index = 0;
         for(int i : requirementsHash)
         {
             requirements[index++] = i;
         }
-        requirements[rogueRequirements] = 0;
         
         System.out.println("rogue in progress:");
         
