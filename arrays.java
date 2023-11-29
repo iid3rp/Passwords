@@ -90,7 +90,7 @@ public class arrays
         /* case 80*/  "Needs to reference a famous novel's title, but without its vowels.",  
         /* case 81*/  "Password should have an allusion to a famous building",  
         /* case 82*/  "Must have the names of a famous pop star in pop culture.",  
-        /* case 83*/  "Name a number 1 song in the billboard hot 100 around 2020-2023",  
+        /* case 83*/  "Name a number 1 song in the billboard hot 100 around 2012-2022",  
         /* case 84*/  "Include a famous actor",  
         /* case 85*/  "Should mention a viral internet trend from 2018.",  
         /* case 86*/  "Password must reference a major sporting event",  
@@ -562,6 +562,136 @@ public class arrays
         "gray:brown", "brown:gray"
         // Add more color pairs as needed
     };
+
+    public static String[] constantWords = \
+    {
+        "pi", "euler", "goldenratio", "squarerootof2", "squarerootoftwo"
+    };
+
+    private static String[] breakfastFoods = new string[]
+    {
+        "pancakes","bacon", "egg", "sausage", "toast",
+        "cereal", "fruit", "oatmeal", "yogurt",
+        "hashbrowns", "smoothie", "waffles", "bagel", "muffin", "granola",
+        "rice"
+    };
+
+    private static String[] italianDishes = 
+    {
+        "pastacarbonara", "risotto", "lasagna", "tiramisu", "ossobuco",
+        "bruschetta", "gelato", "cannoli", "minestrone", "pannacotta",
+        "prosciutto", "arancini", "capresesalad", "tortacap", "spaghetti",
+        "fettuccinealfredo", "gnocchi", "pesto", "cioppino", "cacciatore",
+        "margheritapizza", "amatariciana", "eggplantparmigiana", "limoncello"
+    };
+
+    private static String[] historicalEvents = 
+    {
+        "industrial", "revolution", "renaissance", "cold", "war", "great", "depression",
+        "civil", "rights", "apartheid", "spacerace", "cuban", "missile", "crisis", "vietnam", "war",
+        "rosa", "parks", "atomic", "bomb", "greatfire","london","suffragette", "movement", 
+        "crusade", "dustbowl", "ancient", "greece", "black", "death",
+        "goldrush", "french", "resistance", "moonlanding", "fallofthe", "roman", "empire",
+        "mayflower", "magnacarta", "prohibition", "gutenbergpress", "hundredyears",
+        "manhattan", "project", "nurembergtrials", "trumandoctrine"
+    };
+
+    private static String[] spicyCuisine= 
+    {
+        "sichuan", "thai", "indiancurry", "kimchi", "rendang",
+        "mapotofu", "tomyum", "laksa", "sambal", "phall",
+        "hotpot", "greencurry", "masalachicken", "spicynoodles", "wasabi",
+        "buldak", "rendang", "gochujang", "vindaloo", "padkaprao",
+        "szechuanpepper", "sambalolek", "spicyhotpot", "bibimbap", "hotandspicysoup",
+        "laphet", "spicy", "sambaludang", "tomyam", "khaosoi"
+        "mexican", "ethiopian", "caribbean", "jamaican", "sambal", "phall", "sambaludang",
+        "szechuanpepper", "sambalolek", "spicyhotpot", "bibimbap", "hotandspicysoup", "sriracha"
+    };
+
+    private static String[] fibonacci = 
+    {
+        "((1+sqrt(5))^n-(1-sqrt(5))^n)/(2^n*sqrt(5))",
+        "(phi^n-(-phi)^(-n))/sqrt(5)", // Using the golden ratio phi = (1+sqrt(5))/2
+        "(pow((1+sqrt(5)),n)-pow((1-sqrt(5)),n))/(pow(2,n)*sqrt(5))",
+        "(phi^n-pow(-phi,-n))/sqrt(5)",
+        "round((pow((1+sqrt(5)),n)-pow((1-sqrt(5)),n))/(pow(2,n)*sqrt(5)))" // Rounding for better precision
+    };
+
+    private static String[] popArtists = 
+    {
+        "michaeljackson", "madonna", "beyonce", "elvispresley", "adele",
+        "ladygaga", "justinbieber", "taylorswift", "edsheeran", "rihanna",
+        "katyperry", "brunomars", "whitneyhouston", "arianagrande", "prince",
+        "theweeknd", "shawnmendes", "billieeilish", "duolipa", "harrystyles",
+        "postmalone", "arianagrande", "justintimberlake", "camilacabello", "jasonderulo",
+        "troyesivan", "charlieputh", "selenagomez", "zaynmalik", "katemcgrath"
+    };
+
+    private static String[] javaWords = 
+    {
+        "public", "class", "void", "int", "double", "float", "long", "short", "byte", // Data types
+        "boolean", "char", "String", "final", "static", "abstract", "private", "protected", "public", // Modifiers
+        "if", "else", "switch", "case", "default", "while", "do", "for", // Control flow statements
+        "break", "continue", "return", "throw", "throws", "try", "catch", "finally", // Control flow statements
+        "new", "this", "super", "instanceof", "extends", "implements", // Object-oriented keywords
+        "true", "false", "null",
+        "package", "import",
+        "interface", "enum",
+        "assert", "transient", "volatile",
+        "synchronized", "native", "strictfp"
+    };
+
+    private static String[] ancientMythWords = 
+    {
+        "olympus", "norse", "zeus", "thor", "greek", "mythology",
+        "norse", "medusa", "valhalla", "god", "goddess", "mythicalcreature",
+        "egypt", "anubis", "ra", "odin", "athena",
+        "gorgon", "centaur", "minotaur", "sphinx", "kraken",
+        "pegasus", "cerberus", "nymph", "titan", "demigod",
+        "mythical", "beasts", "mythicalheroes", "creationmyths", "worldtree", "muse"
+    };
+
+    private static String[] planets = 
+    {
+        "mercury", "venus", "jupiter", "saturn", "uranus",
+        "neptune", "pluto", "kepler22b", "trappist1e", "gliese581g",
+        "HD209458b", "PSR1257+12c", "tauCeti-e", "corot7b", "55Cancrie",
+        "k2-18b", "wasp-121b", "hd85512b", "procyonb", "hats6b"
+    };
+
+    private static String[] novelsNoVowels = 
+    {
+        "tkllmckngbrd", "thgrtgtsby", "nnstpbls",  
+        "ldrfthrngs", "thclrftwnd", "frlss", "hrrpttr", "nnnm",  
+        "dnqxt", "ctch22", "fhtfndr", "tlkdnghts", "mbydck", 
+        "tlvsnwst", "wmn", "ndthnblck", "ldyhld", "mrdthnt", 
+    };
+
+    private static String[] famousBuildings = 
+    {
+        "eiffeltower", "colosseum", "tajmahal", "pyramidsofgiza", "statueofliberty",
+        "sydneyoperahouse", "greatwallofchina", "petronastowers", "burjkhalifa", "leaningtowerofpisa",
+        "bigben", "cnTower", "brandenburggate", "saintbasilscathedral", "acropolismuseum",
+        "machupicchu", "chateaudechambord", "uscapitol", "parthenon", "neuschwansteincastle",
+        "alhambrapalace", "sagradafamilia", "pyramidofthemoon", "potalapalace", "hagiasophia",
+        "empirestatebuilding", "lotustemple", "stpancrasstation", "tokyotower", "louvre",
+        "westminsterabbey", "stonehenge", "christtheredeemer", "washingtonmonument", "palaciodabolsa"
+    };
+
+    private static String[] billboardNumberOnes2012to2022 = 
+    {
+        "blindinglights", "good4u", "saveyourtears", "levitating", "monterocallmebyyourname",
+        "kissmemore", "peaches", "stay", "leavethedooropen", "dejavu",
+        "oldtownroad", "thankunext", "señorita", "badguy", "truthhurts",
+        "havanah", "shapeofyou", "uptownfunk", "darkhorse", "happy",
+        "wreckingball", "somebodythatiusedtoknow", "rollinginthedeep", "partyrockanthem", "weareyoung",
+        "californiagurls", "tiktok", "blurredlines", "royals", "lockedoutofheaven",
+        "thriftshop", "harlemshake", "allaboutthatbass", "seeyouagain", "despacito",
+        "bodakyellow", "rockstar", "thegoodfather", "driverslicense", "savagemodeii",
+        "whatsnext",
+        // Add more number one songs from 2012 to 2022 here
+    };
+
     
     public static void main(String[] args)
     {
